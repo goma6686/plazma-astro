@@ -6,7 +6,6 @@ import remarkCollapse from "remark-collapse";
 import sitemap from "@astrojs/sitemap";
 import { SITE } from "./src/config";
 import purgecss from "astro-purgecss";
-
 import tunnel from "astro-tunnel";
 
 // https://astro.build/config
@@ -18,8 +17,9 @@ export default defineConfig({
     }),
     react(),
     sitemap(),
-    purgecss(),
+    sitemap(),
     tunnel(),
+    purgecss(),
   ],
   markdown: {
     remarkPlugins: [

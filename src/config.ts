@@ -25,12 +25,6 @@ export const LOGO_IMAGE = {
 
 export const SOCIALS: SocialObjects = [
   {
-    name: "Github",
-    href: "https://github.com/satnaing/astro-paper",
-    linkTitle: ` ${SITE.title} on Github`,
-    active: false,
-  },
-  {
     name: "Facebook",
     href: "https://www.facebook.com/elektroplazma",
     linkTitle: `${SITE.title} on Facebook`,
