@@ -119,17 +119,37 @@ const socialCount = SOCIALS.filter(social => social.active).length;
     background-color: #444;
     color: #fff;
   }
+  @media screen and (max-width: 636px) {
+    #main-content {
+      @apply mx-auto max-w-6xl w-full;
+      display: grid;
+      grid-auto-columns: auto;
+      grid-template-areas:
+        "... header ..."
+        "... sidebar ..."
+        "...  content-header ..."
+        "...  content ..."
+        "... footer ...";
+    }
 
-  #main-content {
-    @apply mx-auto max-w-6xl w-full;
-    display: grid;
-    /*grid-gap: 5px;*/
-    grid-template-areas:
-      "... header ..."
-      "sidebar content-header ..."
-      "sidebar content ..."
-      "... footer ...";
+    .sidebar {
+      margin-top: 1em;
+    }
   }
+
+  @media screen and (min-width: 636px) {
+    #main-content {
+      @apply mx-auto max-w-6xl w-full;
+      display: grid;
+      /*grid-gap: 5px;*/
+      grid-template-areas:
+        "... header ..."
+        "sidebar content-header ..."
+        "sidebar content ..."
+        "... footer ...";
+    }
+  }
+
   .content-header {
     grid-area: content-header;
   }

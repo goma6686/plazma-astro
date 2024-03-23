@@ -6,7 +6,6 @@ export const SITE: Site = {
   desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
   title: "Elektroplazma",
   ogImage: "elektroplazma.jpg",
-  lightAndDarkMode: false,
   postPerPage: 3,
   scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
 };
@@ -19,8 +18,8 @@ export const LOCALE = {
 export const LOGO_IMAGE = {
   enable: true,
   svg: true,
-  width: 306,
-  height: 77,
+  width: 216,
+  height: 46,
 };
 
 export const SOCIALS: SocialObjects = [
