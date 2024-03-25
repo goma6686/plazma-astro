@@ -10,3 +10,11 @@ const { noPadding = false, ariaHidden = true } = Astro.props;
 <div class={`max-w-3xl mx-auto ${noPadding ? "px-0" : "px-4"}`}>
   <hr class="border-skin-line" aria-hidden={ariaHidden} />
 </div>
+
+<style>
+  @media screen and (max-width: 636px) {
+    div {
+      display: none;
+    }
+  }
+</style>
