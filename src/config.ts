@@ -3,7 +3,7 @@ import type { Site, SocialObjects } from "./types";
 export const SITE: Site = {
   website: "https://kibernetine-arbata23.netlify.app/", // replace this with your deployed domain
   author: "Arbata",
-  desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
+  desc: "Interplanetary sound system",
   title: "Elektroplazma",
   postPerPage: 6,
   eventPerPage: 3,

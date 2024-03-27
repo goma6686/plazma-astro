@@ -114,26 +114,26 @@ const socialCount = SOCIALS.filter(social => social.active).length;
     margin: 2em auto;
   }
 
-  @media screen and (min-width: 70em) {
+  @media screen and (min-width: 70em) and (orientation: landscape) {
     article {
-      @apply max-w-5xl;
       display: grid;
       grid-template-columns: 1fr 3fr;
       column-gap: 2em;
     }
 
     #sidebar {
+      @apply max-w-2xl;
+      padding-left: 1em;
       padding-top: 2em;
     }
   }
 
   @media screen and (max-width: 70em) {
-    #posts {
-      padding-left: 2em;
-    }
-
     #sidebar {
-      padding-top: 2em;
+      padding: 1em;
+    }
+    .content {
+      padding-left: 2em;
     }
   }
 
