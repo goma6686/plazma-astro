@@ -5,9 +5,8 @@ export const SITE: Site = {
   author: "Arbata",
   desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
   title: "Elektroplazma",
-  ogImage: "elektroplazma.jpg",
-  postPerPage: 3,
-  scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
+  postPerPage: 6,
+  eventPerPage: 3,
 };
 
 export const LOCALE = {

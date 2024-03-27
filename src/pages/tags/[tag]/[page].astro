@@ -1,8 +1,8 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
-import TagPosts from "@layouts/TagPosts.astro";
+import TagPosts from "@layouts/post/TagPosts.astro";
 import getUniqueTags from "@utils/getUniqueTags";
-import getPostsByTag from "@utils/getPostsByTag";
+import getPostsByTag from "@utils/posts/getPostsByTag";
 import getPageNumbers from "@utils/getPageNumbers";
 import getPagination from "@utils/getPagination";
 
@@ -36,9 +36,11 @@ const posts = await getCollection("post", ({ data }) => !data.draft);
 const postsByTag = getPostsByTag(posts, tag);
 
 const pagination = getPagination({
-  posts: postsByTag,
+  items: postsByTag,
   page,
+  collection: "posts",
 });
 ---
 
 <TagPosts {...pagination} {tag} {tagName} />
+@utils/posts/getPageNumbers

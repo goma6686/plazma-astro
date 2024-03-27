@@ -1,0 +1,42 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import Events from "@layouts/event/Events.astro";
+import EventDetails from "@layouts/event/EventDetails.astro";
+import getSortedEvents from "@utils/events/getSortedEvents";
+import getPageNumbers from "@utils/getPageNumbers";
+import getPagination from "@utils/getPagination";
+
+export interface Props {
+  event: CollectionEntry<"event">;
+}
+
+export async function getStaticPaths() {
+  const events = await getCollection("event", ({ data }) => !data.draft);
+
+  const eventResult = events.map(event => ({
+    params: { slug: event.slug },
+    props: { event },
+  }));
+
+  const pagePaths = getPageNumbers(events.length).map(pageNum => ({
+    params: { slug: String(pageNum) },
+  }));
+
+  return [...eventResult, ...pagePaths];
+}
+
+const { slug } = Astro.params;
+const { event } = Astro.props;
+
+const events = await getCollection("event");
+
+const sortedEvents = getSortedEvents(events);
+
+const pagination = getPagination({
+  items: sortedEvents,
+  page: slug,
+  collection: "events",
+});
+---
+
+{event ? <EventDetails event={event} /> : <Events {...pagination} />}

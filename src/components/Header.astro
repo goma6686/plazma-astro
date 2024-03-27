@@ -2,11 +2,9 @@
 import { LOGO_IMAGE, SITE } from "@config";
 import Hr from "./Hr.astro";
 import LinkButton from "./LinkButton.astro";
-
 export interface Props {
-  activeNav?: "posts" | "tags" | "about" | "search";
+  activeNav?: "posts" | "events" | "tags" | "about" | "search";
 }
-
 const { activeNav } = Astro.props;
 ---
 
@@ -61,6 +59,11 @@ const { activeNav } = Astro.props;
             </a>
           </li>
           <li>
+            <a href="/events/" class={activeNav === "events" ? "active" : ""}>
+              Events
+            </a>
+          </li>
+          <li>
             <a href="/tags/" class={activeNav === "tags" ? "active" : ""}>
               Tags
             </a>
@@ -99,7 +102,8 @@ const { activeNav } = Astro.props;
 <style>
   @media screen and (max-width: 636px) {
     img {
-      display: none;
+      /*display: none;*/
+      width: 173px;
     }
   }
   #skip-to-content {

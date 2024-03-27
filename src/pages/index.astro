@@ -6,35 +6,49 @@ import Footer from "@components/Footer.astro";
 import LinkButton from "@components/LinkButton.astro";
 import Hr from "@components/Hr.astro";
 import Card from "@components/Card";
+import EventCard from "@components/EventCard";
 import Socials from "@components/Socials.astro";
-import getSortedPosts from "@utils/getSortedPosts";
+import getSortedPosts from "@utils/posts/getSortedPosts";
+import getSortedEvents from "@utils/events/getSortedEvents";
 import { SOCIALS } from "@config";
 
 const posts = await getCollection("post");
+const events = await getCollection("event");
 
 const sortedPosts = getSortedPosts(posts);
+const sortedEvents = getSortedEvents(events);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
+const recentEvents = sortedEvents.filter(({ data }) => !data.featured);
 
 const socialCount = SOCIALS.filter(social => social.active).length;
 ---
 
 <Layout>
   <Header />
-  <main id="main-content">
-    <div class="content-header">
+  <main>
+    <article id="posts">
+      <aside id="sidebar" class="related">
+        {
+          recentEvents.length > 0 && (
+            <section class="item border px-6">
+              <ul class="break-after-column ">
+                {recentEvents.map(
+                  ({ data, slug }, index) =>
+                    index < 4 && (
+                      <EventCard href={`/events/${slug}/`} frontmatter={data} />
+                    )
+                )}
+              </ul>
+            </section>
+          )
+        }
+      </aside>
+      <div class="content">
+        <!--
       <section id="hero">
         <h1>Elektroplazma</h1>
         <p>Interplanetary sound system</p>
-        <!--<p>
-          Read the blog posts or check
-          <LinkButton
-            className="underline decoration-dashed underline-offset-4 hover:text-skin-accent"
-            href="https://github.com/satnaing/astro-paper#readme"
-          >
-            README
-          </LinkButton> for more info.
-        </p>-->
         {
           // only display if at least one social link is enabled
           socialCount > 0 && (
@@ -43,74 +57,49 @@ const socialCount = SOCIALS.filter(social => social.active).length;
             </div>
           )
         }
-      </section>
-
-      <!--<Hr />-->
-    </div>
-
-    <div class="sidebar">
-      <section class="sidebar border" id="sidebar">
-        <div class="item">1</div>
-        <div class="item">2</div>
-        <div class="item">3</div>
-        <div class="item">4</div>
-        <div class="item">5</div>
-      </section>
-    </div>
-    <div class="content">
-      {
-        featuredPosts.length > 0 && (
-          <>
-            <section id="featured">
-              <h2>Featured</h2>
+    </section> -->
+        {
+          featuredPosts.length > 0 && (
+            <>
+              <section id="featured">
+                <h2>Featured</h2>
+                <ul>
+                  {featuredPosts.map(({ data, slug }) => (
+                    <Card href={`/posts/${slug}/`} frontmatter={data} />
+                  ))}
+                </ul>
+              </section>
+            </>
+          )
+        }
+        {
+          recentPosts.length > 0 && (
+            <section id="recent-posts">
+              <h2>Recent Posts</h2>
               <ul>
-                {featuredPosts.map(({ data, slug }) => (
-                  <Card
-                    href={`/posts/${slug}/`}
-                    frontmatter={data}
-                    secHeading={false}
-                  />
-                ))}
+                {recentPosts.map(
+                  ({ data, slug }, index) =>
+                    index < 4 && (
+                      <Card href={`/posts/${slug}/`} frontmatter={data} />
+                    )
+                )}
               </ul>
             </section>
-            {recentPosts.length > 0 && <Hr />}
-          </>
-        )
-      }
-
-      {
-        recentPosts.length > 0 && (
-          <section id="recent-posts">
-            <h2>Recent Posts</h2>
-            <ul>
-              {recentPosts.map(
-                ({ data, slug }, index) =>
-                  index < 4 && (
-                    <Card
-                      href={`/posts/${slug}/`}
-                      frontmatter={data}
-                      secHeading={false}
-                    />
-                  )
-              )}
-            </ul>
-          </section>
-        )
-      }
-
-      <div class="all-posts-btn-wrapper">
-        <LinkButton href="/posts/">
-          All
-          <svg xmlns="http://www.w3.org/2000/svg"
-            ><path
-              d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
-            ></path>
-          </svg>
-        </LinkButton>
+          )
+        }
       </div>
+    </article>
+    <div class="all-posts-btn-wrapper">
+      <LinkButton href="/posts/">
+        All
+        <svg xmlns="http://www.w3.org/2000/svg"
+          ><path
+            d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
+          ></path>
+        </svg>
+      </LinkButton>
     </div>
   </main>
-
   <Footer />
 </Layout>
 
@@ -119,47 +108,48 @@ const socialCount = SOCIALS.filter(social => social.active).length;
     background-color: #444;
     color: #fff;
   }
-  @media screen and (max-width: 636px) {
-    #main-content {
-      @apply mx-auto max-w-6xl w-full;
+
+  body {
+    @apply max-w-7xl;
+    margin: 2em auto;
+  }
+
+  @media screen and (min-width: 70em) {
+    article {
+      @apply max-w-5xl;
       display: grid;
-      grid-auto-columns: auto;
-      grid-template-areas:
-        "... header ..."
-        "... sidebar ..."
-        "...  content-header ..."
-        "...  content ..."
-        "... footer ...";
+      grid-template-columns: 1fr 3fr;
+      column-gap: 2em;
     }
 
-    .sidebar {
-      margin-top: 1em;
+    #sidebar {
+      padding-top: 2em;
     }
   }
 
-  @media screen and (min-width: 636px) {
-    #main-content {
-      @apply mx-auto max-w-6xl w-full;
-      display: grid;
-      /*grid-gap: 5px;*/
-      grid-template-areas:
-        "... header ..."
-        "sidebar content-header ..."
-        "sidebar content ..."
-        "... footer ...";
+  @media screen and (max-width: 70em) {
+    #posts {
+      padding-left: 2em;
+    }
+
+    #sidebar {
+      padding-top: 2em;
     }
   }
 
-  .content-header {
-    grid-area: content-header;
+  /*
+  #posts {
+    grid-area: posts;
+    padding-top: 1em;
+    @apply mx-auto;
   }
-  .sidebar {
+
+  #sidebar {
     grid-area: sidebar;
-  }
+    padding-top: 2em;
+    @apply mx-auto;
+  }*/
 
-  .content {
-    grid-area: content;
-  }
   /* ===== Hero Section ===== */
   #hero {
     @apply pb-6 pt-8;
@@ -186,13 +176,13 @@ const socialCount = SOCIALS.filter(social => social.active).length;
   /* ===== Featured & Recent Posts Sections ===== */
   #featured,
   #recent-posts {
-    @apply pb-6 pt-12;
+    @apply pb-6 pt-6;
   }
   #featured h2,
   #recent-posts h2 {
     @apply text-2xl font-semibold tracking-wide;
   }
   .all-posts-btn-wrapper {
-    @apply my-8 text-center;
+    @apply my-6 text-center;
   }
 </style>

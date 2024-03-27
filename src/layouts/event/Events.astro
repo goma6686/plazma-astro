@@ -1,0 +1,40 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Layout from "@layouts/Layout.astro";
+import Main from "@layouts/Main.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
+import Pagination from "@components/Pagination.astro";
+import EventCard from "@components/EventCard";
+import { SITE } from "@config";
+
+export interface Props {
+  currentPage: number;
+  totalPages: number;
+  paginatedItems: CollectionEntry<"event">[];
+}
+
+const { currentPage, totalPages, paginatedItems } = Astro.props;
+---
+
+<Layout title={`Events | ${SITE.title}`}>
+  <Header activeNav="events" />
+  <Main pageTitle="Events" pageDesc="All the events">
+    <ul>
+      {
+        paginatedItems.map(({ data, slug }) => (
+          <EventCard href={`/events/${slug}/`} frontmatter={data} />
+        ))
+      }
+    </ul>
+  </Main>
+
+  <Pagination
+    {currentPage}
+    {totalPages}
+    prevUrl={`/events${currentPage - 1 !== 1 ? "/" + (currentPage - 1) : ""}/`}
+    nextUrl={`/events/${currentPage + 1}/`}
+  />
+
+  <Footer noMarginTop={totalPages > 1} />
+</Layout>

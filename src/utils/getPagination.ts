@@ -2,17 +2,19 @@ import { SITE } from "@config";
 import getPageNumbers from "./getPageNumbers";
 
 interface GetPaginationProps<T> {
-  posts: T;
+  items: T;
   page: string | number;
   isIndex?: boolean;
+  collection?: string;
 }
 
 const getPagination = <T>({
-  posts,
+  items,
   page,
   isIndex = false,
+  collection,
 }: GetPaginationProps<T[]>) => {
-  const totalPagesArray = getPageNumbers(posts.length);
+  const totalPagesArray = getPageNumbers(items.length);
   const totalPages = totalPagesArray.length;
 
   const currentPage = isIndex
@@ -20,15 +22,16 @@ const getPagination = <T>({
     : page && !isNaN(Number(page)) && totalPagesArray.includes(Number(page))
       ? Number(page)
       : 0;
-
-  const lastPost = isIndex ? SITE.postPerPage : currentPage * SITE.postPerPage;
-  const startPost = isIndex ? 0 : lastPost - SITE.postPerPage;
-  const paginatedPosts = posts.slice(startPost, lastPost);
+  const ItemPerPage =
+    collection === "events" ? SITE.eventPerPage : SITE.postPerPage;
+  const lastItem = isIndex ? ItemPerPage : currentPage * ItemPerPage;
+  const startItem = isIndex ? 0 : lastItem - ItemPerPage;
+  const paginatedItems = items.slice(startItem, lastItem);
 
   return {
     totalPages,
     currentPage,
-    paginatedPosts,
+    paginatedItems,
   };
 };
 

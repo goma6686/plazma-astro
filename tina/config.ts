@@ -1,4 +1,4 @@
-import { defineConfig } from "tinacms";
+import { Form, TinaCMS, defineConfig } from "tinacms";
 
 // Your hosting provider likely exposes this as an environment variable
 const branch =
@@ -29,9 +29,9 @@ export default defineConfig({
   schema: {
     collections: [
       {
-        name: "post",
-        label: "Posts",
-        path: "src/content/post",
+        name: "event",
+        label: "Events",
+        path: "src/content/event",
         fields: [
           {
             type: "string",
@@ -42,12 +42,103 @@ export default defineConfig({
           },
           {
             type: "rich-text",
+            name: "description",
+            label: "description",
+            required: true,
+          },
+          {
+            type: 'datetime',
+            name: 'eventDatetime',
+            label: 'When?',
+            ui: {
+              defaultValue: new Date().toISOString(),
+            },
+          },
+        ]
+      },
+      {
+        ui: {
+          beforeSubmit: async ({
+            form,
+            cms,
+            values,
+          }: {
+            form: Form
+            cms: TinaCMS
+            values: Record<string, any>
+          }) => {
+            if (form.crudType === 'create') {
+              return {
+                ...values,
+                pubDatetime: new Date().toISOString(),
+              }
+            }
+          }
+        },
+
+        name: "post",
+        label: "Posts",
+        path: "src/content/post",
+        defaultItem: () => {
+          return {
+            pubDatetime: new Date().toISOString(),
+            tags: ["elektroplazma"],
+          }
+        },
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Title",
+            isTitle: true,
+            required: true,
+          },
+          {
+            label: "Description",
+            name: "description",
+            type: "string",
+            required: true,
+            ui: {
+              component: "textarea"
+            }
+          },
+          {
+            type: "rich-text",
             name: "body",
             label: "Body",
             isBody: true,
+            required: true,
+          },
+          {
+            type: 'string',
+            name: 'tags',
+            label: 'Tags',
+            list: true,
+            required: true,
+            ui: {
+              component: 'tags',
+            },
+          },
+          {
+            type: 'datetime',
+            name: 'pubDatetime',
+            label: 'Date posted',
+            ui: {
+              defaultValue: new Date().toISOString(),
+            },
+          },
+          {
+            type: 'boolean',
+            name: 'featured',
+            label: 'Featured',
+            ui: {
+              component: 'toggle',
+              defaultValue: false,
+            },
           },
         ],
       },
     ],
   },
+  
 });
