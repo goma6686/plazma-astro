@@ -5,9 +5,8 @@ export type Site = {
   author: string;
   desc: string;
   title: string;
-  ogImage?: string;
   postPerPage: number;
-  scheduledPostMargin: number;
+  eventPerPage: number;
 };
 
 export type SocialObjects = {

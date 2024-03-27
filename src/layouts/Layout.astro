@@ -1,6 +1,7 @@
 ---
 import { LOCALE, SITE } from "@config";
 import "@styles/base.css";
+import Hr from "../components/Hr.astro";
 import { ViewTransitions } from "astro:transitions";
 
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
@@ -9,9 +10,9 @@ export interface Props {
   title?: string;
   author?: string;
   description?: string;
-  ogImage?: string;
-  canonicalURL?: string;
+  body?: string;
   pubDatetime?: Date;
+  eventDatetime?: Date;
   scrollSmooth?: boolean;
 }
 
@@ -19,9 +20,9 @@ const {
   title = SITE.title,
   author = SITE.author,
   description = SITE.desc,
-  ogImage = SITE.ogImage,
-  canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
+  body,
   pubDatetime,
+  eventDatetime,
   scrollSmooth = false,
 } = Astro.props;
 ---
@@ -35,13 +36,13 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="canonical" href={canonicalURL} />
     <meta name="generator" content={Astro.generator} />
 
     <!-- General Meta Tags -->
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
+    <meta name="body" content={body} />
     <meta name="author" content={author} />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
@@ -54,6 +55,7 @@ const {
         />
       )
     }
+    {eventDatetime && <meta content={eventDatetime.toISOString()} />}
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -75,7 +77,6 @@ const {
         />
       )
     }
-
     <ViewTransitions />
   </head>
   <body>

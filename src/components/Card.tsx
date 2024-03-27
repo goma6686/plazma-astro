@@ -5,10 +5,9 @@ import type { CollectionEntry } from "astro:content";
 export interface Props {
   href?: string;
   frontmatter: CollectionEntry<"post">["data"];
-  secHeading?: boolean;
 }
 
-export default function Card({ href, frontmatter, secHeading = true }: Props) {
+export default function Card({ href, frontmatter }: Props) {
   const { title, pubDatetime, description } = frontmatter;
 
   const headerProps = {
@@ -22,14 +21,10 @@ export default function Card({ href, frontmatter, secHeading = true }: Props) {
         href={href}
         className="inline-block text-lg font-medium text-skin-accent decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
       >
-        {secHeading ? (
-          <h2 {...headerProps}>{title}</h2>
-        ) : (
-          <h3 {...headerProps}>{title}</h3>
-        )}
+        <h3 {...headerProps}>{title}</h3>
       </a>
-      <Datetime pubDatetime={pubDatetime} />
-      <p className="descr">{description}</p>
+      <Datetime itemDatetime={pubDatetime} />
+      <p>{description}</p>
     </li>
   );
 }

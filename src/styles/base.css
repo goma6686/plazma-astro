@@ -16,10 +16,22 @@
     @apply flex min-h-[100svh] flex-col bg-skin-fill font-mono text-skin-base 
     selection:bg-skin-accent selection:bg-opacity-70 selection:text-skin-inverted;
   }
-  section,
-  footer {
-    @apply mx-auto max-w-3xl px-4;
+
+  header, footer {
+    @apply max-w-7xl mx-auto w-full;
   }
+
+  #main-content {
+    @apply mx-auto w-full max-w-3xl px-4 pb-4;
+  }
+
+  #main-content h1 {
+    @apply text-2xl font-semibold sm:text-3xl;
+  }
+  #main-content p {
+    @apply mb-6 mt-2 italic;
+  }
+
   a {
     @apply outline-2 outline-offset-1 outline-skin-fill 
     focus-visible:no-underline focus-visible:outline-dashed;
@@ -73,15 +85,20 @@
   .prose h2#table-of-contents + p {
     @apply hidden;
   }
-
-  .descr {
+  .event-card {
+    display: -webkit-box;
+    -webkit-line-clamp: 7; 
+    -webkit-box-orient: vertical;
     overflow: hidden;
-   display: -webkit-box;
-   -webkit-line-clamp: 2; /* number of lines to show */
-           line-clamp: 2; 
-   -webkit-box-orient: vertical;
+    @apply max-w-xs;
   }
 
+  .descr {
+   /* display: -webkit-box;
+    -webkit-line-clamp: 2;  number of lines to show */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
   /* ===== scrollbar ===== */
   html {
     overflow-y: scroll;

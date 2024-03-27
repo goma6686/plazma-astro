@@ -29,6 +29,34 @@ export default defineConfig({
   schema: {
     collections: [
       {
+        name: "event",
+        label: "Events",
+        path: "src/content/event",
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Title",
+            isTitle: true,
+            required: true,
+          },
+          {
+            type: "rich-text",
+            name: "description",
+            label: "description",
+            required: true,
+          },
+          {
+            type: 'datetime',
+            name: 'eventDatetime',
+            label: 'When?',
+            ui: {
+              defaultValue: new Date().toISOString(),
+            },
+          },
+        ]
+      },
+      {
         ui: {
           beforeSubmit: async ({
             form,
@@ -47,6 +75,7 @@ export default defineConfig({
             }
           }
         },
+
         name: "post",
         label: "Posts",
         path: "src/content/post",
