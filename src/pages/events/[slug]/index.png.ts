@@ -3,11 +3,12 @@ import { slugifyStr } from "@utils/slugify";
 
 export async function getStaticPaths() {
   const events = await getCollection("event").then(p =>
-    p.filter(({ data }) => !data.draft)
+    p.filter(({ data }) => data)
   );
 
   return events.map(event => ({
-    params: { slug: slugifyStr(event.data.title) },
+    //params: { slug: slugifyStr(event.data.title) },
+    params: { slug: event.slug },
     props: event,
   }));
 }

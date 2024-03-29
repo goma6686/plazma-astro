@@ -1,15 +1,14 @@
 ---
 import { getCollection } from "astro:content";
-import Events from "@layouts/event/Events.astro";
+import Events from "@layouts/event/Events.astro"; //cia
 import getSortedEvents from "@utils/events/getSortedEvents";
 import getPagination from "@utils/getPagination";
 
 const events = await getCollection("event");
-
 const sortedEvents = getSortedEvents(events);
 
 const pagination = getPagination({
-  items: sortedEvents,
+  items: events,
   page: 1,
   isIndex: true,
   collection: "events",

@@ -8,23 +8,23 @@ export interface Props {
 }
 
 export default function EventCard({ href, frontmatter }: Props) {
-  const { title, eventDateTime, description } = frontmatter;
+  const { eventtitle, eventDatetime, description, eventImage } = frontmatter;
 
   const headerProps = {
-    style: { viewTransitionName: slugifyStr(title) },
-    className: "text-sm decoration-dashed hover:underline",
+    style: { viewTransitionName: slugifyStr(eventtitle) },
+    className: "text-lg decoration-dashed hover:underline",
   };
-
   return (
     <li className="event-card my-2">
       <a
         href={href}
         className=" text-xs text-skin-accent decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
       >
-        <h6 {...headerProps}>{title}</h6>
+        <h6 {...headerProps}>{eventtitle}</h6>
       </a>
-      <Datetime itemDatetime={eventDateTime} />
+      <Datetime itemDatetime={eventDatetime} />
       <p className="descr">{description}</p>
+      <img src={eventImage} className="w-50" />
     </li>
   );
 }

@@ -4,10 +4,10 @@ import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import LinkButton from "@components/LinkButton.astro";
-import Hr from "@components/Hr.astro";
 import Card from "@components/Card";
 import EventCard from "@components/EventCard";
 import Socials from "@components/Socials.astro";
+import Hr from "@components/Hr.astro";
 import getSortedPosts from "@utils/posts/getSortedPosts";
 import getSortedEvents from "@utils/events/getSortedEvents";
 import { SOCIALS } from "@config";
@@ -45,19 +45,6 @@ const socialCount = SOCIALS.filter(social => social.active).length;
         }
       </aside>
       <div class="content">
-        <!--
-      <section id="hero">
-        <h1>Elektroplazma</h1>
-        <p>Interplanetary sound system</p>
-        {
-          // only display if at least one social link is enabled
-          socialCount > 0 && (
-            <div class="social-wrapper">
-              <Socials />
-            </div>
-          )
-        }
-    </section> -->
         {
           featuredPosts.length > 0 && (
             <>
@@ -111,7 +98,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
 
   body {
     @apply max-w-7xl;
-    margin: 2em auto;
+    margin: 0 auto;
   }
 
   @media screen and (min-width: 70em) and (orientation: landscape) {
