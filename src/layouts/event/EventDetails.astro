@@ -3,34 +3,27 @@ import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Datetime from "@components/Datetime";
-import type { CollectionEntry } from "astro:content";
 import { SITE } from "@config";
 
-export interface Props {
-  event: CollectionEntry<"event">;
-}
-
 const { event } = Astro.props;
-
-const { title, description, eventDatetime } = event.data;
-
+const { eventtitle, description, eventDatetime, eventImage, url } = event.data;
 const { Content } = await event.render();
 
 const layoutProps = {
-  title: `${title} | ${SITE.title}`,
+  eventtitle: `${eventtitle} | ${SITE.title}`,
   description,
   eventDatetime,
   scrollSmooth: true,
+  url: url,
 };
 ---
 
 <Layout {...layoutProps}>
   <Header />
 
-  <!-- <div class="progress-container fixed top-0 z-10 h-1 w-full bg-skin-fill">
+  <div class="progress-container fixed top-0 z-10 h-1 w-full bg-skin-fill">
     <div class="progress-bar h-1 w-0 bg-skin-accent" id="myBar"></div>
-  </div> -->
-
+  </div>
   <div class="mx-auto flex w-full max-w-3xl justify-start px-2">
     <button
       class="focus-outline mb-2 mt-8 flex hover:opacity-75"
@@ -44,30 +37,32 @@ const layoutProps = {
     </button>
   </div>
   <main id="main-content">
-    <h1 class="post-title">{title}</h1>
+    <h3 class="post-title">{eventtitle}</h3>
     <Datetime itemDatetime={eventDatetime} size="lg" className="my-2" />
+    <img src={eventImage} width="123" />
     <article id="article" role="article" class="prose mx-auto max-w-5xl mt-8">
+      <p>{description}</p>
       <Content />
     </article>
-
-    <div
-      class="flex flex-col-reverse items-center justify-between gap-6 sm:flex-row-reverse sm:items-end sm:gap-4"
-    >
-      <button
-        id="back-to-top"
-        class="focus-outline whitespace-nowrap py-1 hover:opacity-75"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="rotate-90">
-          <path
-            d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"
-          ></path>
-        </svg>
-        <span>Back to Top</span>
-      </button>
-    </div>
+    <slot />
   </main>
-  <Footer />
+  <div
+    class="flex flex-col-reverse items-center justify-between gap-6 sm:flex-row-reverse sm:items-end sm:gap-4"
+  >
+    <button
+      id="back-to-top"
+      class="focus-outline whitespace-nowrap py-1 hover:opacity-75"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="rotate-90">
+        <path
+          d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"
+        ></path>
+      </svg>
+      <span>Back to Top</span>
+    </button>
+  </div>
 </Layout>
+<Footer />
 
 <style>
   .post-title {
