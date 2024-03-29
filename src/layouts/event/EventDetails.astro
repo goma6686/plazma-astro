@@ -3,8 +3,13 @@ import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Datetime from "@components/Datetime";
+import type { CollectionEntry } from "astro:content";
 import EventBody from "@components/EventBody";
 import { SITE } from "@config";
+
+export interface Props {
+  event: CollectionEntry<"event">;
+}
 
 const { event } = Astro.props;
 const { eventtitle, description, eventDatetime, eventImage, url } = event.data;
@@ -43,9 +48,7 @@ const layoutProps = {
     <img src={eventImage} width="123" />
     <article id="article" role="article" class="prose mx-auto max-w-5xl mt-8">
       <p>{description}</p>
-      <slot />
       <Content />
-      <slot />
     </article>
   </main>
   <div

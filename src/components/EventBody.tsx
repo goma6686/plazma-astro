@@ -17,7 +17,6 @@ export default function EventBody({ props }) {
   return (
     <>
       <h6>aaa</h6>
-      <slot />
     </>
   );
 }
