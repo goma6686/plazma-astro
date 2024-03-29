@@ -3,6 +3,7 @@ import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Datetime from "@components/Datetime";
+import EventBody from "@components/EventBody";
 import { SITE } from "@config";
 
 const { event } = Astro.props;
@@ -42,9 +43,10 @@ const layoutProps = {
     <img src={eventImage} width="123" />
     <article id="article" role="article" class="prose mx-auto max-w-5xl mt-8">
       <p>{description}</p>
+      <slot />
       <Content />
+      <slot />
     </article>
-    <slot />
   </main>
   <div
     class="flex flex-col-reverse items-center justify-between gap-6 sm:flex-row-reverse sm:items-end sm:gap-4"

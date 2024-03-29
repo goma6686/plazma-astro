@@ -1,6 +1,7 @@
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import type { CollectionEntry } from "astro:content";
 import type { StringLiteralType } from "typescript";
+import EventDetails from "@layouts/event/EventDetails.astro";
 
 //const { event } = Astro.props;
 //<TinaMarkdown content={props} components={{ lol }} />
@@ -16,6 +17,7 @@ export default function EventBody({ props }) {
   return (
     <>
       <h6>aaa</h6>
+      <slot />
     </>
   );
 }
