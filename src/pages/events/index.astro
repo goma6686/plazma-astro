@@ -8,7 +8,7 @@ const events = await getCollection("event");
 const sortedEvents = getSortedEvents(events);
 
 const pagination = getPagination({
-  items: events,
+  items: sortedEvents,
   page: 1,
   isIndex: true,
   collection: "events",
