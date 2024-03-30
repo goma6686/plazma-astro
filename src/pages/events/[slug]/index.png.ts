@@ -7,8 +7,7 @@ export async function getStaticPaths() {
   );
 
   return events.map(event => ({
-    //params: { slug: slugifyStr(event.data.title) },
-    params: { slug: event.slug },
+    params: { slug: slugifyStr(event.slug) },
     props: event,
   }));
 }
