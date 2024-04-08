@@ -14,6 +14,7 @@ export interface Props {
   pubDatetime?: Date;
   eventDatetime?: Date;
   scrollSmooth?: boolean;
+  url?: string;
 }
 
 const {
@@ -23,6 +24,7 @@ const {
   body,
   pubDatetime,
   eventDatetime,
+  url,
   scrollSmooth = false,
 } = Astro.props;
 ---
@@ -35,7 +37,10 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <!-- 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+         -->
+    <link rel="canonical" href={new URL(Astro.url, Astro.site).pathname} />
     <meta name="generator" content={Astro.generator} />
 
     <!-- General Meta Tags -->

@@ -17,7 +17,8 @@
     selection:bg-skin-accent selection:bg-opacity-70 selection:text-skin-inverted;
   }
 
-  header, footer {
+  header,
+  footer {
     @apply max-w-7xl mx-auto w-full;
   }
 
@@ -87,17 +88,21 @@
   }
   .event-card {
     display: -webkit-box;
-    -webkit-line-clamp: 7; 
+    -webkit-line-clamp: 7;
     -webkit-box-orient: vertical;
     overflow: hidden;
     @apply max-w-xs;
   }
 
   .descr {
-   /* display: -webkit-box;
+    /* display: -webkit-box;
     -webkit-line-clamp: 2;  number of lines to show */
     -webkit-box-orient: vertical;
     overflow: hidden;
+  }
+
+  .event-cover {
+    max-height: 10em;
   }
   /* ===== scrollbar ===== */
   html {

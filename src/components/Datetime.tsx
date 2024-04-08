@@ -51,6 +51,7 @@ const FormattedDatetime = ({ itemDatetime }: DatetimesProps) => {
 
   return (
     <>
+      <span className="text-nowrap">{date}</span>
       <span aria-hidden="true"> | </span>
       <span className="sr-only">&nbsp;at&nbsp;</span>
       <span className="text-nowrap">{time}</span>

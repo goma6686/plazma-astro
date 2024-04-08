@@ -32,25 +32,53 @@ export default defineConfig({
         name: "event",
         label: "Events",
         path: "src/content/event",
+        format: "mdx",
         fields: [
           {
             type: "string",
-            name: "title",
+            name: "eventtitle",
             label: "Title",
             isTitle: true,
             required: true,
           },
           {
-            type: "rich-text",
+            name: "eventImage",
+            type: "image",
+            ui: {
+              component: "image",
+            }
+          },
+          {
+            type: "string",
             name: "description",
             label: "description",
             required: true,
+          },
+          {
+            type: 'rich-text',
+            label: 'Post Body',
+            name: 'body',
+            isBody: true,
+            templates: [
+              {
+                name: "EventBody",
+                label: "Newsletter Sign Up",
+                fields: [
+                  {
+                    name: "eventBodyImage",
+                    label: "IMAGE",
+                    type: "image",
+                  },
+                ],
+              },
+            ],
           },
           {
             type: 'datetime',
             name: 'eventDatetime',
             label: 'When?',
             ui: {
+              timeFormat: "HH:mm",
               defaultValue: new Date().toISOString(),
             },
           },
@@ -75,7 +103,6 @@ export default defineConfig({
             }
           }
         },
-
         name: "post",
         label: "Posts",
         path: "src/content/post",
