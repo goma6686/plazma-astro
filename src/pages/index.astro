@@ -10,7 +10,6 @@ import Socials from "@components/Socials.astro";
 import Hr from "@components/Hr.astro";
 import getSortedPosts from "@utils/posts/getSortedPosts";
 import getSortedEvents from "@utils/events/getSortedEvents";
-import { SOCIALS } from "@config";
 
 const posts = await getCollection("post");
 const events = await getCollection("event");
@@ -20,8 +19,6 @@ const sortedEvents = getSortedEvents(events);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 const recentEvents = sortedEvents.filter(({ data }) => !data.featured);
-
-const socialCount = SOCIALS.filter(social => social.active).length;
 ---
 
 <Layout>

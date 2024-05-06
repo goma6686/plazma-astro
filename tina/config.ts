@@ -36,7 +36,7 @@ export default defineConfig({
         fields: [
           {
             type: "string",
-            name: "eventtitle",
+            name: "title",
             label: "Title",
             isTitle: true,
             required: true,
@@ -44,6 +44,7 @@ export default defineConfig({
           {
             name: "eventImage",
             type: "image",
+            required: true,
             ui: {
               component: "image",
             }
@@ -59,28 +60,17 @@ export default defineConfig({
             label: 'Post Body',
             name: 'body',
             isBody: true,
-            templates: [
-              {
-                name: "EventBody",
-                label: "Newsletter Sign Up",
-                fields: [
-                  {
-                    name: "eventBodyImage",
-                    label: "IMAGE",
-                    type: "image",
-                  },
-                ],
-              },
-            ],
           },
           {
             type: 'datetime',
             name: 'eventDatetime',
             label: 'When?',
             ui: {
+              dateFormat: "DD MMMM YYYY",
               timeFormat: "HH:mm",
               defaultValue: new Date().toISOString(),
             },
+            required: true,
           },
         ]
       },
