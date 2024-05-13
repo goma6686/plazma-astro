@@ -3,7 +3,7 @@
   "version": "4.2.0",
   "type": "module",
   "scripts": {
-    "dev": "astros dev",
+    "dev": "astro dev",
     "start": "astro dev",
     "build": "tinacms build && astro check && astro build && jampack ./dist",
     "preview": "astro preview",

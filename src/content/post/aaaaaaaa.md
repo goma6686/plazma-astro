@@ -1,30 +1,23 @@
 ---
-title: PADĖK BLITZ IŠSIMOKĖT SKOLĄ
-description: pad3k
+title: BaltiTek
+description: "BaltiTek is an invitation for a collaboration that aims to unite three nations' sound systems and free people of the Baltics in a form of a sound system megawall;
+Local and international DJs, bands, and artists plan to bring various performances spanning over the genres of Tekno, Drum and Bass, Jungle, Breakcore, Punk and more.
+Party will happen this summer, 2024.06.21 – 24"
+postImage: /dw.png
 tags:
-  - Blitz
-pubDatetime: 2024-03-25T18:24:15.716Z
-featured: true
+  - BaltiTek
+  - Tekno
+pubDatetime: 2024-06-21T22:00:00.000Z
 ---
 
-Gali būti liepsna, apšvietimas ir tekstas „BLITZ ç firefund.net/blitz firefund.“ vaizdas
+BaltiTek is an invitation for a collaboration that aims to unite three nations' sound systems and free people of the Baltics in a form of a sound system megawall; 2024.06.21 – 24
+Elektroplazma elektroacoustik LT
+4wayzryad LV
+Disturbed sound system LT
+indigo sound system LT
+supapyx sound system EE
 
-Blitz yra autonominis jaunimo centras, veikiantis Osle nuo 1982 m.
+also generator party
 
-Kaip ir dauguma autonominių kolektyvų, pandemijos metu Blitz patyrė sunkumų, bet išgyveno. Didele našta ant jų pečių tapo milžiniška skola už šildymą ir elektrą.
-
-Jau 42 metus Blitzas yra daugybės aktivizmo grupių ir judejimų centras. Minėtinos veiklos:
-
-🏴 radiOrakel – pirmoji feministinė radijo sotis pasaulyje
-
-🏴 AFA – Oslo antifašistinis judėjimas
-
-🏴 AKKS – ne pelno siekianti organizacija, siekianti didinti įvairovę muzikos senoje
-
-🏴 Barnemakt – nepriklausomas jaunimo tinklas, kuriam yra įgrįsęs nepilnamečių bejėgiškumas politinėse Norvegijos institucijose
-
-🏴 Nettverk for dyrs frihet – gyvūnų teisių aktyvistų grupė
-
-🏴 Artist for Palestine – autonominis menininkų ir kultūros darbuotojų tinklas, reikalaujantis nedelsiant nutraukti karo veiksmus ir sustabdyti palestiniečių genocidą, atliekamą Izraelio vyriausybės.
-
-🏴 Smørsyra – Blitz žurnalas, leistas 1988-2021 m.
+spread the word///
+more info will be announced soon and flow through all channels/

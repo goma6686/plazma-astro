@@ -13,6 +13,7 @@ const blog = defineCollection({
       description: z.string(),
       body: z.string(),
       featuredImage: image(),
+      postImage: z.string().optional(),
       featuredImageAlt: z.string(),
 
       /* eventDatetime: z.date(),

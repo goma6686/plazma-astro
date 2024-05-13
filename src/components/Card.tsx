@@ -8,7 +8,7 @@ export interface Props {
 }
 
 export default function Card({ href, frontmatter }: Props) {
-  const { title, pubDatetime, description } = frontmatter;
+  const { title, pubDatetime, description, postImage } = frontmatter;
 
   const headerProps = {
     style: { viewTransitionName: slugifyStr(title) },
@@ -16,7 +16,7 @@ export default function Card({ href, frontmatter }: Props) {
   };
 
   return (
-    <li className="my-6">
+    <li className="post-card my-6">
       <a
         href={href}
         className="inline-block text-lg font-medium text-skin-accent decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
@@ -25,6 +25,7 @@ export default function Card({ href, frontmatter }: Props) {
       </a>
       <Datetime itemDatetime={pubDatetime} />
       <p>{description}</p>
+      <img src={postImage} className="w-50" />
     </li>
   );
 }
