@@ -18,6 +18,3 @@ elektroplazma elektroacoustik LT
 disturbed sound system LT
 supapyx sound system EE
 indigo sound system LT
-
-spread the word///
-more info will be announced soon and flow through all channels/
