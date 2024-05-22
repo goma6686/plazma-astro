@@ -3,7 +3,7 @@ title: BaltiTek
 description: "BaltiTek is an invitation for a collaboration that aims to unite three nations' sound systems and free people of the Baltics in a form of a sound system megawall;
 Local and international DJs, bands, and artists plan to bring various performances spanning over the genres of Tekno, Drum and Bass, Jungle, Breakcore, Punk and more.
 Party will happen this summer, 2024.06.21 – 24"
-postImage: /dw.png
+postImage: /dw.jpg
 tags:
   - BaltiTek
   - Tekno
