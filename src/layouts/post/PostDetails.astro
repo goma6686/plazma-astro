@@ -48,7 +48,6 @@ const layoutProps = {
   </div>
   <main id="main-content">
     <h1 transition:name={slugifyStr(title)} class="post-title">{title}</h1>
-    <Datetime itemDatetime={pubDatetime} size="lg" className="my-2" />
     <article id="article" role="article" class="prose mx-auto max-w-5xl mt-8">
       <Content />
     </article>

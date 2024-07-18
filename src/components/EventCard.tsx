@@ -8,7 +8,14 @@ export interface Props {
 }
 
 export default function EventCard({ href, frontmatter }: Props) {
-  const { title, eventDatetime, description, eventImage, body } = frontmatter;
+  const {
+    title,
+    eventDatetime,
+    eventEndDatetime,
+    description,
+    eventImage,
+    body,
+  } = frontmatter;
 
   const headerProps = {
     style: { viewTransitionName: slugifyStr(title) },
@@ -22,7 +29,10 @@ export default function EventCard({ href, frontmatter }: Props) {
       >
         <h6 {...headerProps}>{title}</h6>
       </a>
-      <Datetime itemDatetime={eventDatetime} />
+      <Datetime
+        itemDatetime={eventDatetime}
+        eventEndDatetime={eventEndDatetime}
+      />
       <p className="descr">{description}</p>
       <img src={eventImage} className="w-50" />
     </li>

@@ -23,7 +23,6 @@ export default function Card({ href, frontmatter }: Props) {
       >
         <h3 {...headerProps}>{title}</h3>
       </a>
-      <Datetime itemDatetime={pubDatetime} />
       <p>{description}</p>
       <img src={postImage} className="w-50" />
     </li>

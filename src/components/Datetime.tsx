@@ -2,6 +2,7 @@ import { LOCALE } from "@config";
 
 interface DatetimesProps {
   itemDatetime: string | Date;
+  eventEndDatetime: string | Date;
 }
 
 interface Props extends DatetimesProps {
@@ -11,6 +12,7 @@ interface Props extends DatetimesProps {
 
 export default function Datetime({
   itemDatetime,
+  eventEndDatetime,
   size = "sm",
   className,
 }: Props) {
@@ -28,33 +30,69 @@ export default function Datetime({
       </svg>
       <span className="sr-only">Published:</span>
       <span className={`italic ${size === "sm" ? "text-sm" : "text-base"}`}>
-        <FormattedDatetime itemDatetime={itemDatetime} />
+        <FormattedDatetime
+          itemDatetime={itemDatetime}
+          eventEndDatetime={eventEndDatetime}
+        />
       </span>
     </div>
   );
 }
 
-const FormattedDatetime = ({ itemDatetime }: DatetimesProps) => {
-  const myDatetime = new Date(itemDatetime);
+const FormattedDatetime = ({
+  itemDatetime,
+  eventEndDatetime,
+}: DatetimesProps) => {
+  const startDatetime = new Date(itemDatetime);
+  const endDatetime = new Date(eventEndDatetime);
 
-  const date = myDatetime.toLocaleDateString(LOCALE.langTag, {
+  const date = startDatetime.toLocaleDateString(LOCALE.langTag, {
     year: "numeric",
     month: "short",
     day: "numeric",
   });
 
-  const time = myDatetime.toLocaleTimeString(LOCALE.langTag, {
+  const time = startDatetime.toLocaleTimeString(LOCALE.langTag, {
     hour: "2-digit",
     minute: "2-digit",
-    //<time dateTime={myDatetime.toISOString()}>{date}</time>
+    //<time dateTime={startDatetime.toISOString()}>{date}</time>
+  });
+
+  const enddate = endDatetime.toLocaleDateString(LOCALE.langTag, {
+    month: "short",
+    day: "numeric",
+  });
+
+  const endtime = endDatetime.toLocaleTimeString(LOCALE.langTag, {
+    hour: "2-digit",
+    minute: "2-digit",
+    //<time dateTime={startDatetime.toISOString()}>{date}</time>
+  });
+
+  const starttest = startDatetime.toLocaleString(LOCALE.langTag, {
+    timeZone: "Europe/Vilnius",
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+
+  const endtest = endDatetime.toLocaleString(LOCALE.langTag, {
+    timeZone: "Europe/Vilnius",
+    year: "numeric",
+    month: "short",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
   });
 
   return (
     <>
-      <span className="text-nowrap">{date}</span>
-      <span aria-hidden="true"> | </span>
+      <span className="text-nowrap">{starttest}</span>
+      <span aria-hidden="true"> - </span>
       <span className="sr-only">&nbsp;at&nbsp;</span>
-      <span className="text-nowrap">{time}</span>
+      <p>{endtest}</p>
     </>
   );
 };

@@ -2,18 +2,16 @@ import { Form, TinaCMS, defineConfig } from "tinacms";
 
 // Your hosting provider likely exposes this as an environment variable
 const branch =
-  process.env.GITHUB_BRANCH ||
-  process.env.VERCEL_GIT_COMMIT_REF ||
-  process.env.HEAD ||
-  "master";
+  process.env.NEXT_PUBLIC_TINA_BRANCH  ||
+  process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF  ||
+  process.env.HEAD
 
 export default defineConfig({
-  branch,
 
-  // Get this from tina.io
-  clientId: '60dd9ff7-63dd-4cac-a491-c606e64d9901',
-  // Get this from tina.io
-  token: '5c0a3075720e6e64b9e05c921da1dbd298633e70',
+    //...
+    token:  process.env.TINA_TOKEN, // This should match the value in your .env file
+    clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID, // This should match the value in your .env file
+    branch,
 
   build: {
     outputFolder: "admin",
@@ -65,6 +63,17 @@ export default defineConfig({
             type: 'datetime',
             name: 'eventDatetime',
             label: 'When?',
+            ui: {
+              dateFormat: "DD MMMM YYYY",
+              timeFormat: "HH:mm",
+              defaultValue: new Date().toISOString(),
+            },
+            required: true,
+          },
+          {
+            type: 'datetime',
+            name: 'eventEndDatetime',
+            label: 'Until?',
             ui: {
               dateFormat: "DD MMMM YYYY",
               timeFormat: "HH:mm",
