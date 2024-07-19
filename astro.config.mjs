@@ -15,7 +15,7 @@ export default defineConfig({
   site: SITE.website,
   integrations: [ mdx(),tailwind({
     applyBaseStyles: false
-  }), react(),, sitemap(), sitemap(), sentry(), spotlightjs()],
+  }), react(), sitemap(), sentry(), spotlightjs()],
   markdown: {
     remarkPlugins: [remarkToc, [remarkCollapse, {
       test: "Table of contents"

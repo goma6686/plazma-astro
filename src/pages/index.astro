@@ -8,7 +8,6 @@ import Card from "@components/Card";
 import EventCard from "@components/EventCard";
 import getSortedPosts from "@utils/posts/getSortedPosts";
 import getSortedEvents from "@utils/events/getSortedEvents";
-
 const posts = await getCollection("post");
 const events = await getCollection("event");
 
@@ -17,7 +16,8 @@ const sortedEvents = getSortedEvents(events); //isrikiuoja pagal data
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 const recentEvents = sortedEvents.filter(
-  ({ data }) => new Date(data.eventDatetime) > new Date(Date.now())
+  ({ data }) =>
+    +new Date(data.eventDatetime).getTime() > +new Date(Date.now()).getTime()
 ); //kurie tik bus
 ---
 
@@ -32,8 +32,12 @@ const recentEvents = sortedEvents.filter(
               <ul class="break-after-column ">
                 {recentEvents.map(
                   ({ data, slug }, index) =>
-                    index < 4 && (
-                      <EventCard href={`/events/${slug}/`} frontmatter={data} />
+                    index < 3 && (
+                      <EventCard
+                        href={`/events/${slug}/`}
+                        frontmatter={data}
+                        drawLine={index < 2}
+                      />
                     )
                 )}
               </ul>

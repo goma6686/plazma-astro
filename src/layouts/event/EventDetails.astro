@@ -11,7 +11,14 @@ export interface Props {
 }
 
 const { event } = Astro.props;
-const { eventtitle, description, eventDatetime, eventImage, url } = event.data;
+const {
+  eventtitle,
+  description,
+  eventDatetime,
+  eventEndDatetime,
+  eventImage,
+  url,
+} = event.data;
 const { Content } = await event.render();
 
 const layoutProps = {
@@ -43,8 +50,13 @@ const layoutProps = {
   </div>
   <main id="main-content">
     <h3 class="post-title">{eventtitle}</h3>
-    <Datetime itemDatetime={eventDatetime} size="lg" className="my-2" />
-    <img src={eventImage} width="123" />
+    <Datetime
+      itemDatetime={eventDatetime}
+      eventEndDatetime={eventEndDatetime}
+      size="lg"
+      className="my-2"
+    />
+    <img src={eventImage} class="rounded mx-auto img-fluid event-post-image" />
     <article id="article" role="article" class="prose mx-auto max-w-5xl mt-8">
       <p>{description}</p>
       <Content />
@@ -71,5 +83,9 @@ const layoutProps = {
 <style>
   .post-title {
     @apply text-2xl font-semibold text-skin-accent;
+  }
+
+  .event-post-image {
+    @apply w-3/6 max-h-full;
   }
 </style>

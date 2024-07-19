@@ -1,40 +1,38 @@
 import { slugifyStr } from "@utils/slugify";
-import Datetime from "./Datetime";
+import Dates from "./Dates";
 import type { CollectionEntry } from "astro:content";
 
 export interface Props {
   href?: string;
   frontmatter: CollectionEntry<"event">["data"];
+  drawLine: boolean;
 }
 
-export default function EventCard({ href, frontmatter }: Props) {
-  const {
-    title,
-    eventDatetime,
-    eventEndDatetime,
-    description,
-    eventImage,
-    body,
-  } = frontmatter;
+export default function EventCard({ href, frontmatter, drawLine }: Props) {
+  const { title, eventDatetime, eventEndDatetime, description } = frontmatter;
 
   const headerProps = {
     style: { viewTransitionName: slugifyStr(title) },
     className: "text-lg decoration-dashed hover:underline",
   };
+
   return (
-    <li className="event-card my-2">
-      <a
-        href={href}
-        className=" text-xs text-skin-accent decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
-      >
-        <h6 {...headerProps}>{title}</h6>
-      </a>
-      <Datetime
-        itemDatetime={eventDatetime}
-        eventEndDatetime={eventEndDatetime}
-      />
-      <p className="descr">{description}</p>
-      <img src={eventImage} className="w-50" />
-    </li>
+    <>
+      <li className="event-card my-2">
+        <a
+          href={href}
+          className=" text-xs text-skin-accent decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
+        >
+          <h6 {...headerProps}>{title}</h6>
+        </a>
+        <Dates startDate={eventDatetime} endDate={eventEndDatetime} />
+        <p className="descr">{description}</p>
+      </li>
+      {drawLine ? (
+        <div className={`w-full mx-auto px-0`}>
+          <hr className="border-skin-line" aria-hidden={true} />
+        </div>
+      ) : null}
+    </>
   );
 }

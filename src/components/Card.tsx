@@ -8,7 +8,7 @@ export interface Props {
 }
 
 export default function Card({ href, frontmatter }: Props) {
-  const { title, pubDatetime, description, postImage } = frontmatter;
+  const { title, description, postImage } = frontmatter;
 
   const headerProps = {
     style: { viewTransitionName: slugifyStr(title) },
@@ -23,6 +23,7 @@ export default function Card({ href, frontmatter }: Props) {
       >
         <h3 {...headerProps}>{title}</h3>
       </a>
+
       <p>{description}</p>
       <img src={postImage} className="w-50" />
     </li>
