@@ -5,8 +5,6 @@ import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
 import sitemap from "@astrojs/sitemap";
 import { SITE } from "./src/config";
-import purgecss from "astro-purgecss";
-import tunnel from "astro-tunnel";
 import mdx from '@astrojs/mdx';
 
 import sentry from "@sentry/astro";
@@ -17,7 +15,7 @@ export default defineConfig({
   site: SITE.website,
   integrations: [ mdx(),tailwind({
     applyBaseStyles: false
-  }), react(),, sitemap(), sitemap(), tunnel(), purgecss(), sentry(), spotlightjs()],
+  }), react(),, sitemap(), sitemap(), sentry(), spotlightjs()],
   markdown: {
     remarkPlugins: [remarkToc, [remarkCollapse, {
       test: "Table of contents"
