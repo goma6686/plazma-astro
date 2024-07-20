@@ -6,6 +6,7 @@ import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
 import Pagination from "@components/Pagination.astro";
 import Card from "@components/Card";
+import { YouTube } from "astro-embed";
 import { SITE } from "@config";
 
 export interface Props {
@@ -22,9 +23,13 @@ const { currentPage, totalPages, paginatedItems } = Astro.props;
   <Main pageTitle="Posts" pageDesc="All the articles I've posted.">
     <ul>
       {
-        paginatedItems.map(({ data, slug }) => (
-          <Card href={`/posts/${slug}/`} frontmatter={data} />
-        ))
+        paginatedItems.map(({ data, slug }) =>
+          data.video ? (
+            <YouTube id={data.video} />
+          ) : (
+            <Card href={`/posts/${slug}/`} frontmatter={data} />
+          )
+        )
       }
     </ul>
   </Main>

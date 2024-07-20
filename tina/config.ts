@@ -104,6 +104,7 @@ export default defineConfig({
         },
         name: "post",
         label: "Posts",
+        format: "mdx",
         path: "src/content/post",
         defaultItem: () => {
           return {
@@ -127,6 +128,12 @@ export default defineConfig({
             ui: {
               component: "textarea"
             }
+          },
+          {
+            label: "Video",
+            name: "video",
+            type: "string",
+            required: false,
           },
           {
             type: "rich-text",

@@ -88,18 +88,8 @@
   }
   .event-card {
     display: -webkit-box;
-    -webkit-line-clamp: 7;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    @apply max-w-xs;
-  }
-
-  .post-card {
-    /*display: -webkit-box;
-    -webkit-line-clamp: 7;
-    -webkit-box-orient: vertical;
-    overflow: hidden;*/
-    @apply max-w-lg;
   }
 
   .descr {

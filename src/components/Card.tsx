@@ -1,5 +1,4 @@
 import { slugifyStr } from "@utils/slugify";
-import Datetime from "./Datetime";
 import type { CollectionEntry } from "astro:content";
 
 export interface Props {
@@ -24,8 +23,9 @@ export default function Card({ href, frontmatter }: Props) {
         <h3 {...headerProps}>{title}</h3>
       </a>
 
-      <p>{description}</p>
-      <img src={postImage} className="w-50" />
+      {/** 
+      <img src={postImage} className="post-image pt-2" style={{maxWidth: "50%", margin: "auto"}}/>*/}
+      <p className="line-clamp-5">{description}</p>
     </li>
   );
 }

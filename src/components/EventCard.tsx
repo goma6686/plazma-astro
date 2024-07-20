@@ -5,11 +5,12 @@ import type { CollectionEntry } from "astro:content";
 export interface Props {
   href?: string;
   frontmatter: CollectionEntry<"event">["data"];
-  drawLine: boolean;
+  drawLine?: boolean;
 }
 
 export default function EventCard({ href, frontmatter, drawLine }: Props) {
-  const { title, eventDatetime, eventEndDatetime, description } = frontmatter;
+  const { title, eventDatetime, eventEndDatetime, eventImage, description } =
+    frontmatter;
 
   const headerProps = {
     style: { viewTransitionName: slugifyStr(title) },
@@ -26,7 +27,16 @@ export default function EventCard({ href, frontmatter, drawLine }: Props) {
           <h6 {...headerProps}>{title}</h6>
         </a>
         <Dates startDate={eventDatetime} endDate={eventEndDatetime} />
-        <p className="descr">{description}</p>
+
+        <div>
+          <p className="text-xs line-clamp-2">{description}</p>
+        </div>
+
+        <img
+          src={eventImage}
+          className="post-image p-2"
+          style={{ maxWidth: "80%", margin: "auto" }}
+        />
       </li>
       {drawLine ? (
         <div className={`w-full mx-auto px-0`}>

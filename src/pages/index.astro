@@ -8,6 +8,7 @@ import Card from "@components/Card";
 import EventCard from "@components/EventCard";
 import getSortedPosts from "@utils/posts/getSortedPosts";
 import getSortedEvents from "@utils/events/getSortedEvents";
+import { YouTube } from "astro-embed";
 const posts = await getCollection("post");
 const events = await getCollection("event");
 
@@ -19,6 +20,10 @@ const recentEvents = sortedEvents.filter(
   ({ data }) =>
     +new Date(data.eventDatetime).getTime() > +new Date(Date.now()).getTime()
 ); //kurie tik bus
+const pastEvents = sortedEvents.filter(
+  ({ data }) =>
+    +new Date(data.eventDatetime).getTime() < +new Date(Date.now()).getTime()
+);
 ---
 
 <Layout>
@@ -31,6 +36,24 @@ const recentEvents = sortedEvents.filter(
             <section class="item border px-6">
               <ul class="break-after-column ">
                 {recentEvents.map(
+                  ({ data, slug }, index) =>
+                    index < 3 && (
+                      <EventCard
+                        href={`/events/${slug}/`}
+                        frontmatter={data}
+                        drawLine={index < 2}
+                      />
+                    )
+                )}
+              </ul>
+            </section>
+          )
+        }
+        {
+          recentEvents.length === 0 && (
+            <section class="item border px-6">
+              <ul class="break-after-column ">
+                {pastEvents.map(
                   ({ data, slug }, index) =>
                     index < 3 && (
                       <EventCard
@@ -63,13 +86,16 @@ const recentEvents = sortedEvents.filter(
         {
           recentPosts.length > 0 && (
             <section id="recent-posts">
-              <h2>Recent Posts</h2>
               <ul>
-                {recentPosts.map(
-                  ({ data, slug }, index) =>
-                    index < 4 && (
+                {recentPosts.map(({ data, slug }, index) =>
+                  index < 4 && data.video ? (
+                    <div>
                       <Card href={`/posts/${slug}/`} frontmatter={data} />
-                    )
+                      <YouTube id={data.video} />
+                    </div>
+                  ) : (
+                    <Card href={`/posts/${slug}/`} frontmatter={data} />
+                  )
                 )}
               </ul>
             </section>
@@ -104,15 +130,19 @@ const recentEvents = sortedEvents.filter(
 
   @media screen and (min-width: 70em) and (orientation: landscape) {
     article {
-      display: grid;
-      grid-template-columns: 1fr 3fr;
-      column-gap: 2em;
+      display: flex;
+      /*grid-template-columns: 1fr 3fr;
+      column-gap: 2em;*/
     }
 
     #sidebar {
-      @apply max-w-2xl;
+      @apply flex-none w-1/4;
       padding-left: 1em;
       padding-top: 2em;
+    }
+
+    .content {
+      @apply flex-initial w-3/6 mx-auto;
     }
   }
 
@@ -124,19 +154,6 @@ const recentEvents = sortedEvents.filter(
       padding-left: 2em;
     }
   }
-
-  /*
-  #posts {
-    grid-area: posts;
-    padding-top: 1em;
-    @apply mx-auto;
-  }
-
-  #sidebar {
-    grid-area: sidebar;
-    padding-top: 2em;
-    @apply mx-auto;
-  }*/
 
   /* ===== Hero Section ===== */
   #hero {

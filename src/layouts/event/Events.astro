@@ -8,6 +8,7 @@ import Pagination from "@components/Pagination.astro";
 import Hr from "@components/Hr.astro";
 import Card from "@components/EventCard";
 import { SITE } from "@config";
+import EventCard from "@components/EventCard";
 
 export interface Props {
   currentPage: number;
@@ -26,7 +27,6 @@ const { currentPage, totalPages, paginatedItems } = Astro.props;
         paginatedItems.map(({ data, slug }) => (
           <>
             <Card href={`/events/${slug}/`} frontmatter={data} />
-            <Hr />
           </>
         ))
       }

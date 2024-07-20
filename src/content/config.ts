@@ -11,6 +11,7 @@ const blog = defineCollection({
       featured: z.boolean().optional(),
       tags: z.array(z.string()).default(["others"]),
       description: z.string(),
+      video: z.string().optional(),
       body: z.string(),
       featuredImage: image(),
       postImage: z.string().optional(),
