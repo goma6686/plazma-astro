@@ -25,7 +25,11 @@ const { currentPage, totalPages, paginatedItems } = Astro.props;
       {
         paginatedItems.map(({ data, slug }) => (
           <>
-            <EventCard href={`/events/${slug}/`} frontmatter={data} />
+            <EventCard
+              href={`/events/${slug}/`}
+              frontmatter={data}
+              className="w-1/2"
+            />
           </>
         ))
       }

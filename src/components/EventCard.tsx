@@ -5,11 +5,16 @@ import type { CollectionEntry } from "astro:content";
 export interface Props {
   href?: string;
   frontmatter: CollectionEntry<"event">["data"]; //event">["data"];
-
+  className?: string;
   drawLine?: boolean;
 }
 
-export default function EventCard({ href, frontmatter, drawLine }: Props) {
+export default function EventCard({
+  href,
+  frontmatter,
+  drawLine,
+  className = "w-full",
+}: Props) {
   const {
     title,
     eventDatetime,
@@ -39,11 +44,13 @@ export default function EventCard({ href, frontmatter, drawLine }: Props) {
           <p className="text-xs line-clamp-2">{description}</p>
         </div>
         {eventImage || eventImageUrl ? (
-          <img
-            src={eventImageUrl || eventImage}
-            className="post-image p-2"
-            style={{ maxWidth: "70%", margin: "auto" }}
-          />
+          <div className={`${className} mx-auto px-0`}>
+            <img
+              src={eventImageUrl || eventImage}
+              className="w-screen post-image p-2 size-full"
+              style={{ maxWidth: "100%", margin: "auto" }}
+            />
+          </div>
         ) : null}
       </li>
       {drawLine ? (
