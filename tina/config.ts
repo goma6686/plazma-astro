@@ -29,8 +29,8 @@ export default defineConfig({
       {
         name: "event",
         label: "Events",
-        path: "src/content/event",
         format: "mdx",
+        path: "src/content/event",
         fields: [
           {
             type: "string",
@@ -42,10 +42,16 @@ export default defineConfig({
           {
             name: "eventImage",
             type: "image",
-            required: true,
+            required: false,
             ui: {
               component: "image",
             }
+          },
+          {
+            name: "eventImageUrl",
+            type: "string",
+            required: false,
+            
           },
           {
             type: "string",
@@ -54,10 +60,11 @@ export default defineConfig({
             required: true,
           },
           {
-            type: 'rich-text',
-            label: 'Post Body',
-            name: 'body',
+            type: "rich-text",
+            name: "body",
+            label: "Body",
             isBody: true,
+            required: true,
           },
           {
             type: 'datetime',

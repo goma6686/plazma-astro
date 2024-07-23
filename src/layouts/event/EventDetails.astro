@@ -11,22 +11,15 @@ export interface Props {
 }
 
 const { event } = Astro.props;
-const {
-  eventtitle,
-  description,
-  eventDatetime,
-  eventEndDatetime,
-  eventImage,
-  url,
-} = event.data;
+const { title, description, eventDatetime, eventEndDatetime, eventImage } =
+  event.data;
 const { Content } = await event.render();
 
 const layoutProps = {
-  eventtitle: `${eventtitle} | ${SITE.title}`,
+  title: `${title} | ${SITE.title}`,
   description,
   eventDatetime,
   scrollSmooth: true,
-  url: url,
 };
 ---
 
@@ -49,7 +42,7 @@ const layoutProps = {
     </button>
   </div>
   <main id="main-content">
-    <h3 class="post-title">{eventtitle}</h3>
+    <h3 class="post-title">{title}</h3>
     <Datetime
       itemDatetime={eventDatetime}
       eventEndDatetime={eventEndDatetime}
