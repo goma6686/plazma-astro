@@ -25,10 +25,12 @@ const { currentPage, totalPages, paginatedItems } = Astro.props;
       {
         paginatedItems.map(({ data, slug }) =>
           data.video ? (
-            <>
+            <div class="w-full">
               <Card href={`/posts/${slug}/`} frontmatter={data} />
-              <YouTube id={data.video} />
-            </>
+              <div class="w-2/3 mx-auto">
+                <YouTube id={data.video} />
+              </div>
+            </div>
           ) : (
             <Card href={`/posts/${slug}/`} frontmatter={data} />
           )
