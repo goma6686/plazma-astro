@@ -2,7 +2,7 @@ import type { CollectionEntry } from "astro:content";
 
 const getSortedEvents = (events: CollectionEntry<"event">[]) => {
   return events.sort(
-    (a, b) => +new Date(a.data.eventDatetime) - +new Date(b.data.eventDatetime)
+    (a, b) => +new Date(b.data.eventDatetime) - +new Date(a.data.eventDatetime)
   );
 };
 

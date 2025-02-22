@@ -25,6 +25,7 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 const { event } = Astro.props;
+//const { Content } = await event.render();
 
 const eventsCol = await getCollection("event");
 const sortedEvents = getSortedEvents(eventsCol);
