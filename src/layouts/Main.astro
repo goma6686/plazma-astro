@@ -12,11 +12,7 @@ interface ArrayTitleProp {
   pageDesc?: string;
 }
 
-export type Props =
-  | StringTitleProp
-  | (ArrayTitleProp & {
-      children: React.ReactNode;
-    });
+export type Props = StringTitleProp | ArrayTitleProp;
 
 const { props } = Astro;
 ---
