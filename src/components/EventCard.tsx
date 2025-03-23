@@ -4,7 +4,7 @@ import type { CollectionEntry } from "astro:content";
 
 export interface Props {
   href?: string;
-  frontmatter: CollectionEntry<"event">["data"]; //event">["data"];
+  frontmatter: CollectionEntry<"event">["data"];
   className?: string;
   drawLine?: boolean;
 }
@@ -26,8 +26,10 @@ export default function EventCard({
 
   const headerProps = {
     style: { viewTransitionName: slugifyStr(title) },
-    className: "text-lg decoration-dashed hover:underline",
+    className: "text-lg font-medium decoration-dashed hover:underline",
   };
+
+  const imgSrc = eventImageUrl || eventImage;
 
   return (
     <>
@@ -41,14 +43,18 @@ export default function EventCard({
         <Dates startDate={eventDatetime} endDate={eventEndDatetime} />
 
         <div>
-          <p className="text-xs line-clamp-2">{description}</p>
+          <p className="line-clamp-5">{description}</p>
         </div>
-        {eventImage || eventImageUrl ? (
+        {imgSrc ? (
           <div className={`${className} mx-auto px-0`}>
             <img
-              src={eventImageUrl || eventImage}
+              src={imgSrc}
               className="w-screen post-image p-2 size-full"
               style={{ maxWidth: "100%", margin: "auto" }}
+              alt={title || "Event image"}
+              loading="lazy"
+              width="800"
+              height="500"
             />
           </div>
         ) : null}
