@@ -11,14 +11,6 @@ const blog = defineCollection({
     description: z.string(),
     video: z.string().optional(),
     postImage: z.string().optional(),
-
-    /* eventDatetime: z.date(),
-      eventtitle: z.string(),
-      eventdescription: z.string().optional(),
-      eventbody: z.string().optional(),
-      //eventImage: image().optional(),
-      eventImage: z.string().optional(),
-      eventBodyImage: z.string().optional(),*/
   }),
 });
 
@@ -34,7 +26,18 @@ const eventsCollection = defineCollection({
   }),
 });
 
+const imagesCollection = defineCollection({
+  schema: z.object({
+    uploadedDateTime: z.date().default(new Date()),
+    imageUrl: z.string().optional(),
+    title: z.string(),
+    description: z.string(),
+    image: z.string().optional(),
+  }),
+});
+
 export const collections = {
   post: blog,
   event: eventsCollection,
+  image: imagesCollection,
 };

@@ -1,0 +1,49 @@
+---
+import fg from "fast-glob";
+import { getCollection } from "astro:content";
+import getPagination from "@utils/getPagination";
+import Images from "@layouts/images/Images.astro";
+
+// Get post titles
+const posts = await getCollection("post");
+const postTitles = posts.map(post => post.data.title);
+
+// Get all collection folder paths
+const collections = fg.sync("public/*", { onlyDirectories: true });
+
+// Extract just the collection names
+const collectionNames = collections.map(path => path.split("/").pop());
+
+// Filter to only include collections that have a matching post title
+const validCollections = collections.filter((_, index) => {
+  const collectionName = collectionNames[index];
+  if (!collectionName) return false; // or some other default value
+  return postTitles.some(title => {
+    // Normalize both strings for comparison
+    const normalizedCollectionName = collectionName
+      .toLowerCase()
+      .replace(/\s+/g, "");
+    const normalizedTitle = title.toLowerCase().replace(/\s+/g, "");
+
+    return normalizedTitle === normalizedCollectionName;
+  });
+});
+
+// Get all images from valid collections
+const imageFiles: string[] = [];
+validCollections.forEach(collection => {
+  const images = fg.sync(`${collection}/**/*.{png,jpg,jpeg,gif,webp}`);
+  // Convert file paths to web URLs by removing 'public' prefix
+  const imageUrls = images.map(img => img.replace("public", ""));
+  imageFiles.push(...imageUrls);
+});
+
+const pagination = getPagination({
+  items: imageFiles,
+  page: 1,
+  isIndex: true,
+  collection: "images",
+});
+---
+
+<Images {...pagination} />

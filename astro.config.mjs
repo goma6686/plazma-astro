@@ -35,5 +35,13 @@ export default defineConfig({
       exclude: ["@resvg/resvg-js"]
     }
   },
-  scopedStyleStrategy: "where"
+  scopedStyleStrategy: "where",
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
+      config: {
+        cache: true,
+      }
+    }
+  }
 });

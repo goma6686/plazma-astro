@@ -1,9 +1,10 @@
 {
-  "extends": "astro/tsconfigs/base",
+  "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "strictNullChecks": true,
     "baseUrl": "src",
     "jsx": "react-jsx",
+    "allowSyntheticDefaultImports": true,
     "paths": {
       "@assets/*": ["assets/*"],
       "@config": ["config.ts"],
