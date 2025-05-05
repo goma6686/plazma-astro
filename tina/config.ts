@@ -7,8 +7,6 @@ const branch =
   process.env.HEAD
 
 export default defineConfig({
-
-    //...
     token:  process.env.TINA_TOKEN, // This should match the value in your .env file
     clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID, // This should match the value in your .env file
     branch,
@@ -19,8 +17,8 @@ export default defineConfig({
   },
   media: {
     tina: {
-      mediaRoot: "",
-      publicFolder: "public",
+      mediaRoot: "/src/uploads",
+      publicFolder: "",
     },
   },
   // See docs on content modeling for more info on how to setup new content models: https://tina.io/docs/schema/

@@ -1,8 +1,10 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
+    "types": ["astro/client"],
     "strictNullChecks": true,
     "baseUrl": "src",
+    "module": "es2020",
     "jsx": "react-jsx",
     "allowSyntheticDefaultImports": true,
     "paths": {

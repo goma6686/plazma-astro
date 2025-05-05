@@ -1,0 +1,41 @@
+---
+import Breadcrumbs from "@components/Breadcrumbs.astro";
+
+interface StringTitleProp {
+  pageTitle: string;
+  pageDesc?: string;
+  containerStyle?: string;
+}
+
+interface ArrayTitleProp {
+  pageTitle: [string, string];
+  titleTransition: string;
+  pageDesc?: string;
+  containerStyle?: string;
+}
+
+export type Props = StringTitleProp | ArrayTitleProp;
+
+const { props } = Astro;
+---
+<div class="w-full px-4 sm:px-6 lg:px-8">
+  <div class="max-w-6xl mx-auto">
+    <Breadcrumbs containerStyle="gallerybreadcrumb" />
+    <main id="main-contentas" class={props.containerStyle}>
+      {
+        "titleTransition" in props ? (
+          <h1>
+            {props.pageTitle[0]}
+            <span transition:name={props.titleTransition}>
+              {props.pageTitle[1]}
+            </span>
+          </h1>
+        ) : (
+          <h1>{props.pageTitle}</h1>
+        )
+      }
+      <p>{props.pageDesc}</p>
+      <slot />
+    </main>
+  </div>
+</div>

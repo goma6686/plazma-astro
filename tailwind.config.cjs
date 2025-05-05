@@ -10,14 +10,18 @@ function withOpacity(variableName) {
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
   theme: {
     container: {
       center: true,
     },
-    // Remove the following screen breakpoint or add other breakpoints
-    // if one breakpoint is not enough for you
     screens: {
-      sm: "640px",
+      'sm': '640px',
+      'md': '768px',  // Make sure this exists
+      'lg': '1024px',
+      'xl': '1280px',
     },
 
     extend: {

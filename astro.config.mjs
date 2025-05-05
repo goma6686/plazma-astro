@@ -9,8 +9,6 @@ import mdx from '@astrojs/mdx';
 import embeds from 'astro-embed/integration';
 
 import sentry from "@sentry/astro";
-import spotlightjs from "@spotlightjs/astro";
-//import { YouTube } from "astro-embed";
 
 // https://astro.build/config
 export default defineConfig({
@@ -20,7 +18,7 @@ export default defineConfig({
     }
   }), mdx(),tailwind({
     applyBaseStyles: false
-  }), react(), sitemap(), sentry(), spotlightjs()],
+  }), react(), sitemap(), sentry()],
   markdown: {
     remarkPlugins: [remarkToc, [remarkCollapse, {
       test: "Table of contents"
@@ -32,6 +30,7 @@ export default defineConfig({
   },
   vite: {
     optimizeDeps: {
+      include: ['*.{png,jpg,jpeg,gif,webp}'],
       exclude: ["@resvg/resvg-js"]
     }
   },
