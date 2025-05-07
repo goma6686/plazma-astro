@@ -26,29 +26,26 @@ const eventsCollection = defineCollection({
   }),
 });
 
-const imagesCollection = defineCollection({
-  schema: z.object({
-    uploadedDateTime: z.date().default(new Date()),
-    imageUrl: z.string().optional(),
-    title: z.string(),
-    description: z.string(),
-    image: z.string().optional(),
-  }),
-});
-
-const albums = defineCollection({
-  type: "data",
-  schema: ({ image }) =>
-    z.object({
-      title: z.string(),
-      description: z.string().optional(),
-      cover: image(),
-    }),
+const albumSchema = z.object({
+  title: z.string(),
+  description: z.string().optional(),
+  cover: z.string().optional(),
+  images: z
+    .array(
+      z.object({
+        image: z.string(),
+        alt: z.string().optional(),
+        show_on_cta: z.boolean().optional(),
+      })
+    )
+    .optional(),
 });
 
 export const collections = {
   post: blog,
   event: eventsCollection,
-  image: imagesCollection,
-  albums: albums
+  albums: defineCollection({
+    schema: albumSchema,
+    type: "content",
+  }),
 };

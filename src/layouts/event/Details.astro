@@ -6,11 +6,11 @@ import { slugifyStr } from "@utils/slugify";
 <main id="main-content">
   <h1
     transition:name={slugifyStr(frontmatter.title)}
-    class="post-title text-center p-2"
+    class="post-title p-2 text-center"
   >
     {frontmatter.title}
   </h1>
-  <article id="article" role="article" class="prose mx-auto max-w-5xl mt-8">
+  <article id="article" role="article" class="prose mx-auto mt-8 max-w-5xl">
     <slot />
   </article>
 </main>

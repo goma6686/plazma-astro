@@ -1,5 +1,6 @@
 import { slugifyStr } from "@utils/slugify";
 import type { CollectionEntry } from "astro:content";
+import React from "react";
 
 export interface Props {
   href?: string;
@@ -23,8 +24,11 @@ export default function Card({ href, frontmatter }: Props) {
         <h3 {...headerProps}>{title}</h3>
       </a>
 
-      {/** 
-      <img src={postImage} className="post-image pt-2" style={{maxWidth: "50%", margin: "auto"}}/>*/}
+      <img
+        src={postImage}
+        className="post-image pt-2"
+        style={{ maxWidth: "50%", margin: "auto" }}
+      />
       <p className="line-clamp-5">{description}</p>
     </li>
   );

@@ -27,7 +27,7 @@ const { currentPage, totalPages, paginatedItems } = Astro.props;
           data.video ? (
             <div class="w-full">
               <Card href={`/posts/${slug}/`} frontmatter={data} />
-              <div class="w-2/3 mx-auto">
+              <div class="mx-auto w-2/3">
                 <YouTube id={data.video} />
               </div>
             </div>

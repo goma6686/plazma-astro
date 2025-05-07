@@ -1,4 +1,5 @@
 import { LOCALE } from "@config";
+import React from "react";
 
 interface DateProps {
   startDate: string | Date;
@@ -44,11 +45,13 @@ const FormattedDate = ({ startDate, endDate }: DateProps) => {
   const fromDate = FromDate.toLocaleString(LOCALE.langTag, {
     month: "short",
     day: "2-digit",
+    timeZone: "Europe/Vilnius",
   });
 
   const toDate = new Date(endDate).toLocaleString(LOCALE.langTag, {
     month: "short",
     day: "numeric",
+    timeZone: "Europe/Vilnius",
   });
 
   return (

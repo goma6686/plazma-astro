@@ -46,21 +46,11 @@ const layoutProps = {
       size="lg"
       className="my-2"
     />
-    <img src={eventImage} class="rounded mx-auto img-fluid event-post-image" />
-    <article id="article" role="article" class="prose mx-auto max-w-5xl mt-8">
+    <img src={eventImage} class="img-fluid event-post-image mx-auto rounded" />
+    <article id="article" role="article" class="prose mx-auto mt-8 max-w-5xl">
       <p>{description}</p>
       <Content />
     </article>
   </main>
 </Layout>
 <Footer />
-
-<style>
-  .post-title {
-    @apply text-2xl font-semibold text-skin-accent;
-  }
-
-  .event-post-image {
-    @apply w-3/6 max-h-full;
-  }
-</style>

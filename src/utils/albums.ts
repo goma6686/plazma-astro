@@ -1,20 +1,69 @@
-export async function getAlbumImages(albumId: string) {
-    // 1. List all album files from collections path
-    let images = import.meta.glob<{ default: ImageMetadata }>(
-      "/src/uploads/**/*.{jpeg,jpg}"
+import { getCollection } from "astro:content";
+
+export async function getAlbumImagesWithMetadata(slug: string) {
+  const albums = await getCollection("albums", entry => entry.slug === slug);
+
+  if (albums.length === 0) return [];
+
+  const albumData = albums[0].data;
+
+  if (albumData.images && albumData.images.length > 0) {
+    const imagePromises = albumData.images.map(
+      async (imgData: {
+        image: string;
+        alt?: string;
+        show_on_cta?: boolean;
+      }) => {
+        try {
+          const cleanImagePath = decodeURIComponent(
+            imgData.image.replace(/^\//, "")
+          );
+          const imageModule = await import(`/public/${cleanImagePath}`);
+          return {
+            src: imageModule.default,
+            alt: imgData.alt || `Image from ${albumData.title}`,
+            showOnCta: imgData.show_on_cta || false,
+          };
+        } catch (error) {
+          console.error(`Failed to load image: ${imgData.image}`, error);
+          return null;
+        }
+      }
     );
-  
-    // 2. Filter images by albumId
-    images = Object.fromEntries(
-      Object.entries(images).filter(([key]) => key.includes(albumId))
-    );
-  
-    // 3. Images are promises, so we need to resolve the glob promises
-    const resolvedImages = await Promise.all(
-      Object.values(images).map((image) => image().then((mod) => mod.default))
-    );
-  
-    // 4. Shuffle images in random order
-    resolvedImages.sort(() => Math.random() - 0.5);
-    return resolvedImages;
+
+    const resolvedImages = await Promise.all(imagePromises);
+
+    return resolvedImages.filter(img => img !== null);
   }
+}
+
+export async function getAllAlbumTitles() {
+  const albums = await getCollection("albums");
+
+  const albumsWithCovers = await Promise.all(
+    albums.map(async album => {
+      let coverImage = null;
+      if (album.data.cover) {
+        try {
+          const cleanImagePath = decodeURIComponent(
+            album.data.cover.replace(/^\//, "")
+          );
+          const imageModule = await import(
+            /* @vite-ignore */ `/public/${cleanImagePath}`
+          );
+          coverImage = imageModule.default;
+        } catch (error) {
+          console.error(`Failed to load image: ${album.data.cover}`, error);
+        }
+      }
+
+      return {
+        images: album.data.images,
+        title: album.data.title,
+        cover: coverImage,
+        slug: album.slug,
+      };
+    })
+  );
+  return albumsWithCovers;
+}
