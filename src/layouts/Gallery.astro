@@ -1,0 +1,31 @@
+---
+interface StringTitleProp {
+  pageTitle: string;
+  pageDesc?: string;
+  containerStyle?: string;
+}
+
+export type Props = StringTitleProp;
+
+const { props } = Astro;
+---
+
+<div class="mx-auto max-w-6xl">
+  <button
+    class="focus-outline mb-2 mt-8 flex hover:opacity-75"
+    onclick="(() => (history.length === 1) ? window.location = '/' : history.back())()"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg"
+      ><path
+        d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"
+      ></path>
+    </svg><span>Go back</span>
+  </button>
+  <main id="main-contentas" class={props.containerStyle}>
+    <h3 class="post-title">{props.pageTitle}</h3>
+    <article id="article" role="article" class="prose mx-auto mt-8 max-w-5xl">
+      <p>{props.pageDesc}</p>
+      <slot />
+    </article>
+  </main>
+</div>

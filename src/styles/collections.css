@@ -1,0 +1,7 @@
+.post-title {
+  @apply text-2xl font-semibold text-skin-accent;
+}
+
+.event-post-image {
+  @apply max-h-full w-3/6;
+}

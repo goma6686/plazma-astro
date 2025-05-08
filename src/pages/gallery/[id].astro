@@ -1,0 +1,52 @@
+---
+import "@styles/gallery.css";
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import Header from "@components/Header.astro";
+import Layout from "@layouts/Layout.astro";
+import Footer from "@components/Footer.astro";
+import { getAlbumImagesWithMetadata } from "@utils/albums";
+import Gallery from "@layouts/Gallery.astro";
+
+export async function getStaticPaths() {
+  const albums = await getCollection("albums");
+  return albums.map(album => ({
+    params: { id: album.slug },
+    props: { album },
+  }));
+}
+
+const { album } = Astro.props;
+if (!album) {
+  return Astro.redirect("/gallery");
+}
+const images = await getAlbumImagesWithMetadata(album.slug);
+---
+
+<Layout title={album.data.title}>
+  <Header activeNav="gallery" />
+  <Gallery pageTitle={album.data.title} pageDesc={album.data.description}>
+    <div class="w-full">
+      <div class="mx-auto max-w-7xl text-center">
+        {
+          images ? (
+            <div class="masonry-grid">
+              {images.map(image => (
+                <div class="masonry-item">
+                  <Image
+                    src={image.src}
+                    alt={image.alt}
+                    class="h-auto w-full rounded object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>No images found for this album.</p>
+          )
+        }
+      </div>
+    </div>
+  </Gallery>
+  <Footer />
+</Layout>

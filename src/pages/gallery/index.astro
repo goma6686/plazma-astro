@@ -1,0 +1,55 @@
+---
+import { Image } from "astro:assets";
+import Header from "@components/Header.astro";
+import Layout from "@layouts/Layout.astro";
+import Main from "@layouts/Main.astro";
+import { SITE } from "@config";
+import Footer from "@components/Footer.astro";
+import { getAllAlbumTitles } from "@utils/albums";
+import DefaultImage from "@assets/elektroplazma.jpg";
+
+const albums = await getAllAlbumTitles();
+---
+
+<Layout title={`gallery | ${SITE.title}`}>
+  <Header activeNav="gallery" />
+  <Main pageTitle="gallery" pageDesc="////////...">
+    <div class="container mx-auto grid max-w-screen-sm grid-cols-2 gap-8">
+      {
+        albums.map(item => (
+          <a
+            href={`/gallery/${item.slug}`}
+            class="group mb-4 block transition-all"
+          >
+            {item.cover ? (
+              <Image
+                src={item.cover}
+                alt={item.title}
+                format="avif"
+                inferSize={true}
+                quality="mid"
+                class:list={[
+                  "rounded-sm transition-all",
+                  "group-hover:opacity-90 group-hover:shadow-lg",
+                ]}
+              />
+            ) : (
+              <img
+                src={DefaultImage.src}
+                width={DefaultImage.width}
+                height={DefaultImage.height}
+                class="rounded-sm transition-all group-hover:opacity-90 group-hover:shadow-lg"
+                alt={item.title || "Event image"}
+                loading="lazy"
+              />
+            )}
+            <div class="mt-4 text-center">
+              <strong class="font-normal">{item.title}</strong>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </Main>
+  <Footer />
+</Layout>

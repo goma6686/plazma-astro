@@ -1,4 +1,5 @@
 import { LOCALE } from "@config";
+import React from "react";
 
 interface DatetimesProps {
   itemDatetime: string | Date;
@@ -62,7 +63,6 @@ const FormattedDatetime = ({
     timeZone: "Europe/Vilnius",
     hour: "numeric",
     minute: "2-digit",
-    //<time dateTime={startDatetime.toISOString()}>{date}</time>
   });
 
   return (

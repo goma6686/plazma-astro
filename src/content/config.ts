@@ -11,14 +11,6 @@ const blog = defineCollection({
     description: z.string(),
     video: z.string().optional(),
     postImage: z.string().optional(),
-
-    /* eventDatetime: z.date(),
-      eventtitle: z.string(),
-      eventdescription: z.string().optional(),
-      eventbody: z.string().optional(),
-      //eventImage: image().optional(),
-      eventImage: z.string().optional(),
-      eventBodyImage: z.string().optional(),*/
   }),
 });
 
@@ -34,7 +26,26 @@ const eventsCollection = defineCollection({
   }),
 });
 
+const albumSchema = z.object({
+  title: z.string(),
+  description: z.string().optional(),
+  cover: z.string().optional(),
+  images: z
+    .array(
+      z.object({
+        image: z.string(),
+        alt: z.string().optional(),
+        show_on_cta: z.boolean().optional(),
+      })
+    )
+    .optional(),
+});
+
 export const collections = {
   post: blog,
   event: eventsCollection,
+  albums: defineCollection({
+    schema: albumSchema,
+    type: "content",
+  }),
 };

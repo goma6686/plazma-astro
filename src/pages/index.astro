@@ -41,7 +41,7 @@ const pastEvents = sortedEvents.filter(({ data }) => {
         {
           recentEvents.length > 0 && (
             <section class="item border px-6">
-              <ul class="break-after-column ">
+              <ul class="break-after-column">
                 {recentEvents.map(
                   ({ data, slug }, index) =>
                     index < 3 && (
@@ -59,7 +59,7 @@ const pastEvents = sortedEvents.filter(({ data }) => {
         {
           recentEvents.length === 0 && (
             <section class="item border px-6">
-              <ul class="break-after-column ">
+              <ul class="break-after-column">
                 {pastEvents.map(
                   ({ data, slug }, index) =>
                     index < 3 && (
@@ -98,7 +98,7 @@ const pastEvents = sortedEvents.filter(({ data }) => {
                   index < 4 && data.video ? (
                     <div class="w-full">
                       <Card href={`/posts/${slug}/`} frontmatter={data} />
-                      <div class="w-2/3 mx-auto">
+                      <div class="mx-auto w-2/3">
                         <YouTube id={data.video} />
                       </div>
                     </div>
@@ -140,18 +140,16 @@ const pastEvents = sortedEvents.filter(({ data }) => {
   @media only screen and (min-width: 48em) {
     article {
       display: flex;
-      /*grid-template-columns: 1fr 3fr;
-      column-gap: 2em;*/
     }
 
     #sidebar {
-      @apply flex-none w-1/4;
+      @apply w-1/4 flex-none;
       padding-left: 1em;
       padding-top: 2em;
     }
 
     .content {
-      @apply flex-initial w-2/3 mx-auto;
+      @apply mx-auto w-2/3 flex-initial;
     }
   }
 
@@ -161,10 +159,10 @@ const pastEvents = sortedEvents.filter(({ data }) => {
     }
 
     #sidebar .item {
-      @apply w-3/4 mx-auto;
+      @apply mx-auto w-3/4;
     }
     .content {
-      @apply w-3/4 mx-auto;
+      @apply mx-auto w-3/4;
     }
   }
 
