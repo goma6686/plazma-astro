@@ -1,0 +1,34 @@
+fragment EventParts on Event {
+  __typename
+  title
+  eventImage
+  eventImageUrl
+  description
+  body
+  eventDatetime
+  eventEndDatetime
+}
+
+fragment PostParts on Post {
+  __typename
+  title
+  description
+  video
+  postImage
+  body
+  tags
+  pubDatetime
+  featured
+}
+
+fragment AlbumsParts on Albums {
+  __typename
+  title
+  description
+  cover
+  images {
+    __typename
+    image
+    alt
+  }
+}
