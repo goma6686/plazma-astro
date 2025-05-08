@@ -28,7 +28,7 @@ export function postFields() {
             type: "image",
             name: "postImage",
             label: "Cover Image",
-            required: true,
+            required: false,
             ui: {
               component: "image",
             }
