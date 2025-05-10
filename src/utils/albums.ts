@@ -26,31 +26,20 @@ export async function getAlbumImagesWithMetadata(slug: string) {
 
 export async function getAllAlbumTitles() {
   const albums = await getCollection("albums");
+  const albumsWithCovers = albums.map(album => {
+    // Process the cover path if it exists
+    const coverImage = album.data.cover
+      ? album.data.cover.startsWith("/")
+        ? album.data.cover
+        : `/${album.data.cover}`
+      : null;
 
-  const albumsWithCovers = await Promise.all(
-    albums.map(async album => {
-      let coverImage = null;
-      if (album.data.cover) {
-        try {
-          const cleanImagePath = decodeURIComponent(
-            album.data.cover.replace(/^\//, "")
-          );
-          const imageModule = await import(
-            /* @vite-ignore */ `/public/${cleanImagePath}`
-          );
-          coverImage = imageModule.default;
-        } catch (error) {
-          console.error(`Failed to load image: ${album.data.cover}`, error);
-        }
-      }
-
-      return {
-        images: album.data.images,
-        title: album.data.title,
-        cover: coverImage,
-        slug: album.slug,
-      };
-    })
-  );
+    return {
+      images: album.data.images,
+      title: album.data.title,
+      cover: coverImage,
+      slug: album.slug,
+    };
+  });
   return albumsWithCovers;
 }

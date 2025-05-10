@@ -22,25 +22,22 @@ const albums = await getAllAlbumTitles();
             class="group mb-4 block transition-all"
           >
             {item.cover ? (
-              <Image
+              <img
                 src={item.cover}
                 alt={item.title}
+                class="rounded-sm transition-all group-hover:opacity-90 group-hover:shadow-lg w-full h-auto"
+                loading="lazy"
+              />
+            ) : (
+              <Image
+                src={DefaultImage}
+                alt={item.title || "Event image"}
                 format="avif"
-                inferSize={true}
                 quality="mid"
                 class:list={[
                   "rounded-sm transition-all",
                   "group-hover:opacity-90 group-hover:shadow-lg",
                 ]}
-              />
-            ) : (
-              <img
-                src={DefaultImage.src}
-                width={DefaultImage.width}
-                height={DefaultImage.height}
-                class="rounded-sm transition-all group-hover:opacity-90 group-hover:shadow-lg"
-                alt={item.title || "Event image"}
-                loading="lazy"
               />
             )}
             <div class="mt-4 text-center">
