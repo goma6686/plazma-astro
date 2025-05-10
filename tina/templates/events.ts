@@ -42,8 +42,7 @@ export function eventFields() {
           label: 'When?',
           ui: {
             dateFormat: "DD MMMM YYYY",
-            timeFormat: "HH:mm",
-            defaultValue: new Date().toISOString(),
+            timeFormat: "HH:mm"
           },
           required: true,
         },
@@ -53,8 +52,7 @@ export function eventFields() {
           label: 'Until?',
           ui: {
             dateFormat: "DD MMMM YYYY",
-            timeFormat: "HH:mm",
-            defaultValue: new Date().toISOString(),
+            timeFormat: "HH:mm"
           },
           required: true,
         },

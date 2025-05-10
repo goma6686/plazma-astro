@@ -46,9 +46,12 @@ export default defineConfig({
             values: Record<string, any>
           }) => {
             if (form.crudType === 'create') {
+              const now = new Date().toISOString();
               return {
                 ...values,
-                pubDatetime: new Date().toISOString()
+                pubDatetime: new Date().toISOString(),
+                eventDatetime: values.eventDatetime || now,
+                eventEndDatetime: values.eventEndDatetime || now,
               }
             }
             return values
