@@ -89,9 +89,6 @@ export function postFields() {
             type: 'datetime',
             name: 'pubDatetime',
             label: 'Date posted',
-            ui: {
-              defaultValue: new Date().toISOString(),
-            },
           },
           {
             type: 'boolean',

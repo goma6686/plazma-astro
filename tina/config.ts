@@ -51,6 +51,7 @@ export default defineConfig({
                 pubDatetime: new Date().toISOString()
               }
             }
+            return values
           }
         },
         name: "post",
@@ -60,7 +61,6 @@ export default defineConfig({
         fields: postFields(),
         defaultItem: () => {
           return {
-            pubDatetime: new Date().toISOString(),
             tags: ["elektroplazma"],
           }
         },
