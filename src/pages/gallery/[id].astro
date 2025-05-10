@@ -29,14 +29,15 @@ const images = await getAlbumImagesWithMetadata(album.slug);
     <div class="w-full">
       <div class="mx-auto max-w-7xl text-center">
         {
-          images ? (
+          images && images.length ? (
             <div class="masonry-grid">
               {images.map(image => (
                 <div class="masonry-item">
-                  <Image
+                  <img
                     src={image.src}
                     alt={image.alt}
                     class="h-auto w-full rounded object-cover"
+                    loading="lazy"
                   />
                 </div>
               ))}
