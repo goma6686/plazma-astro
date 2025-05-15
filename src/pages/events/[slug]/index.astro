@@ -17,7 +17,7 @@ export async function getStaticPaths() {
     props: { event },
   }));
 
-  const pagePaths = getPageNumbers(events.length).map(pageNum => ({
+  const pagePaths = getPageNumbers(events.length, "event").map(pageNum => ({
     params: { slug: String(pageNum) },
   }));
   return [...eventResult, ...pagePaths];

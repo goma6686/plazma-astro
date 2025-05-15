@@ -44,7 +44,7 @@ const pastEvents = sortedEvents.filter(({ data }) => {
               <ul class="break-after-column">
                 {recentEvents.map(
                   ({ data, slug }, index) =>
-                    index < 3 && (
+                    index < 10 && (
                       <EventCard
                         href={`/events/${slug}/`}
                         frontmatter={data}
@@ -110,18 +110,18 @@ const pastEvents = sortedEvents.filter(({ data }) => {
             </section>
           )
         }
+        <div class="all-posts-btn-wrapper">
+          <LinkButton href="/posts/">
+            All
+            <svg xmlns="http://www.w3.org/2000/svg"
+              ><path
+                d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
+              ></path>
+            </svg>
+          </LinkButton>
+        </div>
       </div>
     </article>
-    <div class="all-posts-btn-wrapper">
-      <LinkButton href="/posts/">
-        All
-        <svg xmlns="http://www.w3.org/2000/svg"
-          ><path
-            d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
-          ></path>
-        </svg>
-      </LinkButton>
-    </div>
   </main>
   <Footer />
 </Layout>
@@ -146,6 +146,7 @@ const pastEvents = sortedEvents.filter(({ data }) => {
       @apply w-1/4 flex-none;
       padding-left: 1em;
       padding-top: 2em;
+      margin-bottom: 1rem;
     }
 
     .content {
