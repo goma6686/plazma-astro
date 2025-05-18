@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "tinacms dev -c \"astro dev\"",
-    "tina-dev": "tinacms dev -c \"node --max-old-space-size=4096 node_modules/.bin/astro dev\"",
+    "tina-dev": "tinacms dev -c \"astro dev\"",
     "start": "tinacms build && astro dev",
     "build": "tinacms build && astro build && jampack ./dist",
     "preview": "astro preview",

@@ -11,8 +11,14 @@ export interface Props {
 }
 
 const { event } = Astro.props;
-const { title, description, eventDatetime, eventEndDatetime, eventImage } =
-  event.data;
+const {
+  title,
+  description,
+  eventDatetime,
+  eventEndDatetime,
+  eventImage,
+  location,
+} = event.data;
 const { Content } = await event.render();
 
 const layoutProps = {
@@ -43,6 +49,9 @@ const layoutProps = {
     <Datetime
       itemDatetime={eventDatetime}
       eventEndDatetime={eventEndDatetime}
+      title={title}
+      description={description}
+      location={location}
       size="lg"
       className="my-2"
     />

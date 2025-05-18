@@ -23,6 +23,7 @@ const eventsCollection = defineCollection({
     description: z.string(),
     eventImage: z.string().optional(),
     body: z.string().optional(),
+    location: z.string().optional(),
   }),
 });
 
@@ -35,7 +36,6 @@ const albumSchema = z.object({
       z.object({
         image: z.string(),
         alt: z.string().optional(),
-        show_on_cta: z.boolean().optional(),
       })
     )
     .optional(),

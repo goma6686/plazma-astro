@@ -1,25 +1,25 @@
 import { getCollection } from "astro:content";
 
-export async function getAlbumImagesWithMetadata(slug: string) {
-  const albums = await getCollection("albums", entry => entry.slug === slug);
-  if (albums.length === 0) return [];
-  const albumData = albums[0].data;
+interface AlbumData {
+  title: string;
+  images?: {
+    image: string;
+    alt?: string;
+  }[];
+}
 
+export async function getAlbumImagesWithMetadata(albumData: AlbumData) {
   if (albumData.images && albumData.images.length > 0) {
-    return albumData.images.map(
-      (imgData: { image: string; alt?: string; show_on_cta?: boolean }) => {
-        // Clean up the path and ensure it starts with /
-        const cleanImagePath = imgData.image.startsWith("/")
-          ? imgData.image
-          : `/${imgData.image}`;
+    return albumData.images.map((imgData: { image: string; alt?: string }) => {
+      const cleanImagePath = imgData.image.startsWith("/")
+        ? imgData.image
+        : `/${imgData.image}`;
 
-        return {
-          src: cleanImagePath, // Return the path directly
-          alt: imgData.alt || `Image from ${albumData.title}`,
-          showOnCta: imgData.show_on_cta || false,
-        };
-      }
-    );
+      return {
+        src: cleanImagePath,
+        alt: imgData.alt || `Image from ${albumData.title}`,
+      };
+    });
   }
   return [];
 }

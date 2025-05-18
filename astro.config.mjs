@@ -8,10 +8,6 @@ import { SITE } from "./src/config";
 import mdx from '@astrojs/mdx';
 import embeds from 'astro-embed/integration';
 
-import sentry from "@sentry/astro";
-import spotlightjs from "@spotlightjs/astro";
-//import { YouTube } from "astro-embed";
-
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
@@ -20,7 +16,7 @@ export default defineConfig({
     }
   }), mdx(),tailwind({
     applyBaseStyles: false
-  }), react(), sitemap(), sentry(), spotlightjs()],
+  }), react(), sitemap()],
   markdown: {
     remarkPlugins: [remarkToc, [remarkCollapse, {
       test: "Table of contents"
