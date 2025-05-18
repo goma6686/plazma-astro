@@ -5,11 +5,9 @@ import Footer from "@components/Footer.astro";
 import Datetime from "@components/Datetime";
 import type { CollectionEntry } from "astro:content";
 import { SITE } from "@config";
-
 export interface Props {
   event: CollectionEntry<"event">;
 }
-
 const { event } = Astro.props;
 const {
   title,
@@ -20,18 +18,42 @@ const {
   location,
 } = event.data;
 const { Content } = await event.render();
-
 const layoutProps = {
   title: `${title} | ${SITE.title}`,
   description,
   eventDatetime,
   scrollSmooth: true,
 };
+
+const startDate = new Date(eventDatetime);
+const endDate = new Date(eventEndDatetime);
+
+const formatDate = (date: Date) => {
+  return date.toISOString().split("T")[0];
+};
+
+const formatTime = (date: Date) => {
+  return date.toLocaleTimeString("lt-LT", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+    timeZone: "Europe/Vilnius",
+  });
+};
+
+const calendarData = {
+  title,
+  description,
+  location: location || "",
+  startDate: formatDate(startDate),
+  startTime: formatTime(startDate),
+  endDate: formatDate(endDate),
+  endTime: formatTime(endDate),
+};
 ---
 
 <Layout {...layoutProps}>
   <Header />
-
   <div class="mx-auto flex w-full max-w-3xl justify-start px-2">
     <button
       class="focus-outline mb-2 mt-8 flex hover:opacity-75"
@@ -46,6 +68,7 @@ const layoutProps = {
   </div>
   <main id="main-content">
     <h3 class="post-title">{title}</h3>
+
     <Datetime
       itemDatetime={eventDatetime}
       eventEndDatetime={eventEndDatetime}
@@ -63,3 +86,36 @@ const layoutProps = {
   </main>
 </Layout>
 <Footer />
+
+<script
+  src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2.4.1/dist/atcb.min.js"
+  defer></script>
+
+<script is:inline define:vars={{ calendarData }}>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (typeof atcb_action === "undefined") {
+      window.addEventListener("load", setupCalendarButton);
+    } else {
+      setupCalendarButton();
+    }
+  });
+
+  function setupCalendarButton() {
+    const config = {
+      name: calendarData.title,
+      description: calendarData.description,
+      location: calendarData.location,
+      startDate: calendarData.startDate,
+      startTime: calendarData.startTime,
+      endDate: calendarData.endDate,
+      endTime: calendarData.endTime,
+      options: ["Apple", "Google"],
+      timeZone: "Europe/Vilnius",
+    };
+
+    const button = document.getElementById("add-to-calendar-button");
+    if (button && typeof atcb_action === "function") {
+      button.addEventListener("click", () => atcb_action(config, button));
+    }
+  }
+</script>

@@ -108,4 +108,69 @@ const {
   <body>
     <slot />
   </body>
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@2.4.1/dist/atcb.min.js"
+    defer></script>
+
+  <script is:inline>
+    document.addEventListener("DOMContentLoaded", function () {
+      function setupCalendarButtons() {
+        if (typeof atcb_action !== "function") {
+          setTimeout(setupCalendarButtons, 100);
+          return;
+        }
+
+        const calendarButtons = document.querySelectorAll('[id^="atc-btn-"]');
+
+        calendarButtons.forEach(button => {
+          const title = button.getAttribute("data-title") || "Event";
+          const description = button.getAttribute("data-description") || "";
+          const location = button.getAttribute("data-location") || "";
+          const startDateStr = button.getAttribute("data-start-date");
+          const endDateStr = button.getAttribute("data-end-date");
+
+          if (!startDateStr) return;
+
+          const startDate = new Date(startDateStr);
+          const endDate = new Date(endDateStr);
+
+          const formatDate = date => {
+            return date.toISOString().split("T")[0];
+          };
+
+          const formatTime = date => {
+            return date.toLocaleTimeString("lt-LT", {
+              hour: "2-digit",
+              minute: "2-digit",
+              hour12: false,
+              timeZone: "Europe/Vilnius",
+            });
+          };
+
+          button.addEventListener("click", function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            atcb_action(
+              {
+                name: title,
+                description: description,
+                location: location,
+                startDate: formatDate(startDate),
+                startTime: formatTime(startDate),
+                endDate: formatDate(endDate),
+                endTime: formatTime(endDate),
+                options: ["Apple", "Google"],
+                timeZone: "Europe/Vilnius",
+              },
+              button
+            );
+          });
+        });
+      }
+
+      setupCalendarButtons();
+    });
+  </script>
 </html>

@@ -24,44 +24,32 @@ export default function Dates({
   className,
 }: Props) {
   const startDateObj = new Date(startDate);
-  const endDateObj = new Date(endDate);
-
-  const formatAddEventDate = (date: Date) => {
-    return date.toLocaleString("lt-LT", {
-      month: "2-digit",
-      day: "2-digit",
-      year: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-      timeZone: "Europe/Vilnius",
-    });
-  };
-
-  const atcStartDate = formatAddEventDate(startDateObj);
-  const atcEndDate = formatAddEventDate(endDateObj);
+  const buttonId = `atc-btn-${title?.replace(/\s+/g, "-").toLowerCase() || ""}-${startDateObj.getTime()}`;
 
   return (
     <div
       className={`flex items-center space-x-2 opacity-80 ${className} mt-2 mb-2`}
     >
-      <div
-        title="Add to Calendar"
-        className="addeventatc"
-        data-styling="none"
-        data-dropdown-y="down"
+      <button
+        className="text-decoration-none hover:opacity-70 transition-opacity"
+        id={buttonId}
+        data-title={title}
+        data-description={description}
+        data-location={location}
+        data-start-date={startDate.toString()}
+        data-end-date={endDate.toString()}
       >
-        <img
-          src="https://cdn.addevent.com/libs/imgs/icon-calendar-fff-t1.svg"
-          alt=""
-          style={{ width: 18 }}
-        />
-        <span className="start">{atcStartDate}</span>
-        <span className="end">{atcEndDate}</span>
-        <span className="timezone">Europe/Vilnius</span>
-        <span className="title">{title}</span>
-        <span className="description">{description}</span>
-        <span className="location">{location}</span>
-      </div>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className={`${
+            size === "sm" ? "scale-90" : "scale-100"
+          } inline-block h-6 w-6 min-w-[1.375rem] fill-skin-base`}
+          aria-hidden="true"
+        >
+          <path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path>
+          <path d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z"></path>
+        </svg>
+      </button>
       <span className={`italic ${size === "sm" ? "text-sm" : "text-base"}`}>
         <FormattedDate startDate={startDate} endDate={endDate} />
       </span>
@@ -71,21 +59,17 @@ export default function Dates({
 
 const FormattedDate = ({ startDate, endDate }: DateProps) => {
   const FromDate = new Date(startDate);
-
   const startYear = FromDate.getFullYear();
-
   const fromDate = FromDate.toLocaleString(LOCALE.langTag, {
     month: "short",
     day: "2-digit",
     timeZone: "Europe/Vilnius",
   });
-
   const toDate = new Date(endDate).toLocaleString(LOCALE.langTag, {
     month: "short",
     day: "numeric",
     timeZone: "Europe/Vilnius",
   });
-
   return (
     <>
       <span className="text-nowrap">
@@ -93,7 +77,6 @@ const FormattedDate = ({ startDate, endDate }: DateProps) => {
         <span aria-hidden="true"> - </span>
         {toDate}
       </span>
-      <span className="sr-only">&nbsp;at&nbsp;</span>
     </>
   );
 };
