@@ -28,6 +28,7 @@
     "@tinacms/auth": "^1.0.12",
     "@tinacms/graphql": "^1.5.17",
     "@types/react-dom": "^18.3.0",
+    "add-to-calendar-button-react": "^2.8.9",
     "astro": "^5.7.10",
     "astro-embed": "^0.9.0",
     "backend": "^0.0.0",
