@@ -20,7 +20,7 @@ const { album } = Astro.props;
 if (!album) {
   return Astro.redirect("/gallery");
 }
-const images = await getAlbumImagesWithMetadata(album.slug);
+const images = await getAlbumImagesWithMetadata(album.data);
 ---
 
 <Layout title={album.data.title}>

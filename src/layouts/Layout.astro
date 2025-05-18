@@ -35,9 +35,33 @@ const {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <!-- 
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-         -->
+    <!-- Include: AddEvent theme css -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.addevent.com/libs/atc/themes/000-theme-3/theme.css"
+      type="text/css"
+      media="all"
+    />
+    <!-- AddEvent script -->
+    <script
+      type="text/javascript"
+      src="https://cdn.addevent.com/libs/atc/1.6.1/atc.min.js"
+      async
+      defer></script>
+
+    <!-- AddEvent Settings -->
+    <script type="text/javascript">
+      window.addeventasync = function () {
+        addeventatc.settings({
+          appleical: { show: true, text: "Apple Calendar" },
+          google: { show: true, text: "Google <em>(online)</em>" },
+          office365: { show: true, text: "Office 365 <em>(online)</em>" },
+          outlook: { show: false },
+          outlookcom: { show: true, text: "Outlook.com <em>(online)</em>" },
+          yahoo: { show: false },
+        });
+      };
+    </script>
     <link rel="canonical" href={new URL(Astro.url, Astro.site).pathname} />
     <meta name="generator" content={Astro.generator} />
 

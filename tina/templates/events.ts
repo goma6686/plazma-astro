@@ -21,7 +21,6 @@ export function eventFields() {
           name: "eventImageUrl",
           type: "string",
           required: false,
-          
         },
         {
           type: "string",
@@ -55,6 +54,11 @@ export function eventFields() {
             timeFormat: "HH:mm"
           },
           required: true,
+        },
+        {
+          name: "location",
+          type: "string",
+          required: false,
         },
       ] as TinaField[]
 }

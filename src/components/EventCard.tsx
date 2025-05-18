@@ -23,6 +23,7 @@ export default function EventCard({
     eventImage,
     description,
     eventImageUrl,
+    location,
   } = frontmatter;
 
   const headerProps = {
@@ -41,8 +42,13 @@ export default function EventCard({
         >
           <h6 {...headerProps}>{title}</h6>
         </a>
-        <Dates startDate={eventDatetime} endDate={eventEndDatetime} />
-
+        <Dates
+          startDate={eventDatetime}
+          endDate={eventEndDatetime}
+          title={title}
+          description={description}
+          location={location}
+        />
         <div>
           <p className="line-clamp-5">{description}</p>
         </div>

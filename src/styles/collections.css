@@ -5,3 +5,11 @@
 .event-post-image {
   @apply max-h-full w-3/6;
 }
+
+.addeventatc_dropdown {
+  padding: 6px 0px;
+}
+
+.addeventatc_dropdown .copyx {
+  display: none;
+}
