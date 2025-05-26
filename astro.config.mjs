@@ -7,10 +7,13 @@ import sitemap from "@astrojs/sitemap";
 import { SITE } from "./src/config";
 import mdx from '@astrojs/mdx';
 import embeds from 'astro-embed/integration';
+import netlify from '@astrojs/netlify';
 
 // https://astro.build/config
 export default defineConfig({
   site: SITE.website,
+  output: "server",
+  adapter: netlify(),
   integrations: [ embeds({
     services: {
     }
