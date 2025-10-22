@@ -1,4 +1,4 @@
-import { TinaField } from "tinacms";
+import { type TinaField } from "tinacms";
 
 export function galleryFields() {
   return [

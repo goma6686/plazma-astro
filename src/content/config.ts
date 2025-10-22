@@ -27,6 +27,16 @@ const eventsCollection = defineCollection({
   }),
 });
 
+const rentCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    price: z.string(),
+    rentImage: z.string().optional(),
+    body: z.string().optional(),
+  }),
+});
+
 const albumSchema = z.object({
   title: z.string(),
   description: z.string().optional(),
@@ -44,8 +54,10 @@ const albumSchema = z.object({
 export const collections = {
   post: blog,
   event: eventsCollection,
+  rent: rentCollection,
   albums: defineCollection({
     schema: albumSchema,
     type: "content",
-  }),
+  })
 };
+

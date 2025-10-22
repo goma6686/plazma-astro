@@ -1,0 +1,64 @@
+---
+export const prerender = true;
+import Header from "@components/Header.astro";
+import Layout from "@layouts/Layout.astro";
+import Main from "@layouts/Main.astro";
+import { SITE } from "@config";
+import Footer from "@components/Footer.astro";
+import { getAllStuffForRent } from "@utils/rent";
+
+const rentstuff = await getAllStuffForRent();
+---
+
+<Layout title={`rent | ${SITE.title}`}>
+  <Header activeNav="rent" />
+  <Main pageTitle="Sound Stuff for Rent" pageDesc="////////...">
+    <div class="container mx-auto max-w-3xl px-2">
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-2">
+      {
+        rentstuff.length > 0 ? (
+          rentstuff.map(item => (
+            <a
+              href={`/rent/${item.slug}`}
+              class="group block overflow-hidden border border-skin-line transition-all hover:shadow-xl hover:-translate-y-1"
+            >
+                <div class="aspect-square overflow-hidden bg-skin-fill">
+                  <img
+                      src={item.cover}
+                      alt={item.title}
+                      class="h-full w-full object-cover transition-transform duration-300"
+                      loading="lazy"
+                    />
+                </div>
+                <div class="p-4">
+                  <h3 class="text-lg font-semibold text-skin-accent mb-2 line-clamp-2">
+                    {item.title}
+                  </h3>
+                  
+                  {item.description && (
+                  <p class="text-sm text-skin-base mb-3 line-clamp-2 whitespace-pre-line group-hover:line-clamp-none transition-all">
+                    {item.description}
+                  </p>
+                  )}
+                  
+                  <div class="flex items-center justify-between">
+                    <span class="text-md text-skin-accent">
+                      {item.price}
+                    </span>
+                    <span class="text-sm text-skin-base group-hover:text-skin-accent transition-colors">
+                      View details →
+                    </span>
+                  </div>
+                </div>
+            </a>
+          ))
+        ) : 
+        <div class="group block overflow-hidden transition-all hover:shadow-xl hover:-translate-y-1">
+          <span>Nothing at the moment :(</span>
+        </div>
+      }
+    </div>
+  </div>
+  </Main>
+  <Footer />
+</Layout>

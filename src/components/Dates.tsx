@@ -62,18 +62,18 @@ export default function Dates({
 }
 
 const FormattedDate = ({ startDate, endDate }: DateProps) => {
-  const FromDate = new Date(startDate);
-  const startYear = FromDate.getFullYear();
-  const fromDate = FromDate.toLocaleString(LOCALE.langTag, {
+  const FromDate = startDate ? new Date(startDate) : null;
+  const startYear = FromDate?.getFullYear();
+  const fromDate = FromDate?.toLocaleString(LOCALE.langTag, {
     month: "short",
     day: "2-digit",
     timeZone: "Europe/Vilnius",
   });
-  const toDate = new Date(endDate).toLocaleString(LOCALE.langTag, {
+  const toDate = endDate ? new Date(endDate).toLocaleString(LOCALE.langTag, {
     month: "short",
     day: "numeric",
     timeZone: "Europe/Vilnius",
-  });
+  }) : null;
   return (
     <>
       <span className="text-nowrap">

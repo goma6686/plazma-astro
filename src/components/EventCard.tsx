@@ -21,7 +21,7 @@ export default function EventCard({
     eventDatetime,
     eventEndDatetime,
     eventImage = 'elektroplazma_warped.png',
-    description,
+    description = '-> sound stuff to rent <-',
     eventImageUrl,
     location,
   } = frontmatter;

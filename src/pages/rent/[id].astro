@@ -1,0 +1,71 @@
+---
+export const prerender = true;
+import { getCollection } from "astro:content";
+import Header from "@components/Header.astro";
+import Layout from "@layouts/Layout.astro";
+import Footer from "@components/Footer.astro";
+import { SITE } from "@config";
+import { slugifyStr } from "@utils/slugify";
+
+export async function getStaticPaths() {
+  const rentstuff = await getCollection("rent");
+  return rentstuff.map(thing => ({
+    params: { id: thing.slug },
+    props: { thing },
+  }));
+}
+
+const { thing } = Astro.props;
+if (!thing) {
+  return Astro.redirect("/rent");
+}
+
+const { title, description, price, rentImage, body } = thing.data;
+const layoutProps = {
+  title: `${title} | ${SITE.title}`,
+  description,
+  scrollSmooth: true,
+};
+const { Content } = await thing.render();
+
+---
+
+<Layout {...layoutProps}>
+  <Header activeNav="rent" />
+  <div class="mx-auto flex w-full max-w-3xl justify-start px-2">
+    <button
+      class="focus-outline mb-2 mt-8 flex hover:opacity-75"
+      onclick="(() => (history.length === 1) ? window.location = '/' : history.back())()"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg"
+        ><path
+          d="M13.293 6.293 7.586 12l5.707 5.707 1.414-1.414L10.414 12l4.293-4.293z"
+        ></path>
+      </svg><span>Go back</span>
+    </button>
+  </div>
+  <main id="main-content">
+    <h1 transition:name={slugifyStr(title)} class="post-title p-2 text-start">
+      {title}
+    </h1>
+    <img
+      src={rentImage}
+      class="post-image"
+      style={{ maxWidth: "100%", margin: "auto" }}
+    />
+    <article id="article" role="article" class="prose mx-auto mt-8 max-w-5xl">
+      <p class="block">Price: {price}</p>
+      <Content />
+      <div class="mt-auto space-y-3">
+        <a
+        href="mailto:elektroplazma@hotmail.com?subject=Rental inquiry: {title}"
+        class="block w-full py-2 font-semibold text-skin-accent transition-colors"
+      >
+        Contact
+      </a>
+      </div>
+    </article>
+  </main>
+  </Main>
+  <Footer />
+</Layout>
