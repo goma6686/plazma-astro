@@ -17,10 +17,10 @@ export default function EventCard({
   className = "w-full",
 }: Props) {
   const {
-    title,
+    title = 'No Upcoming Events :(',
     eventDatetime,
     eventEndDatetime,
-    eventImage,
+    eventImage = 'elektroplazma_warped.png',
     description,
     eventImageUrl,
     location,
