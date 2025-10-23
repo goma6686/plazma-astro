@@ -1,7 +1,6 @@
 import { slugifyStr } from "@utils/slugify";
 import Dates from "./Dates";
 import type { CollectionEntry } from "astro:content";
-import React from "react";
 
 export interface Props {
   href?: string;
@@ -17,11 +16,15 @@ export default function EventCard({
   className = "w-full",
 }: Props) {
   const {
-    title,
+    title = 'No Upcoming Events :(',
     eventDatetime,
     eventEndDatetime,
-    eventImage,
-    description,
+    eventImage = 'elektroplazma_warped.png',
+    description = (<p>
+      <a className="group inline-block hover:text-skin-accent undefined" href={`/rent/`}>
+      {"-> sound stuff to rent <-"}
+      </a>
+      </p>),
     eventImageUrl,
     location,
   } = frontmatter;

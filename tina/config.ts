@@ -2,6 +2,7 @@ import { Form, TinaCMS, defineConfig } from "tinacms";
 import { galleryFields } from "./templates/gallery";
 import { postFields } from "./templates/posts";
 import { eventFields } from "./templates/events";
+import { rentFields } from "./templates/rentstuff";
 
 // Your hosting provider likely exposes this as an environment variable
 const branch =
@@ -74,6 +75,13 @@ export default defineConfig({
         format: "mdx",
         path: "src/content/albums",
         fields: galleryFields()
+      },
+      {
+        name: "rentstuff",
+        label: "Rent Stuff",
+        format: "mdx",
+        path: "src/content/rent",
+        fields: rentFields(),
       },
     ],
   },  

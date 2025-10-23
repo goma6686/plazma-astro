@@ -1,6 +1,6 @@
 ---
 export const prerender = false;
-import { getCollection } from "astro:content";
+import { CollectionEntry, getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
@@ -26,15 +26,7 @@ const recentEvents = sortedEvents.filter(({ data }) => {
   return eventDate >= now;
 });
 
-const pastEvents = sortedEvents.filter(({ data }) => {
-  // Get current date at midnight
-  const now = new Date();
-  now.setHours(0, 0, 0, 0);
-  const eventDate = new Date(data.eventDatetime);
-  return eventDate < now;
-});
 ---
-
 <Layout>
   <Header />
   <main>
@@ -62,16 +54,11 @@ const pastEvents = sortedEvents.filter(({ data }) => {
           recentEvents.length === 0 && (
             <section class="item border px-6">
               <ul class="break-after-column">
-                {pastEvents.map(
-                  ({ data, slug }, index) =>
-                    index < 3 && (
-                      <EventCard
-                        href={`/events/${slug}/`}
-                        frontmatter={data}
-                        drawLine={index < recentEvents.length - 1}
+                <EventCard
+                        href={`/events/`}
+                        frontmatter={[]}
+                        drawLine={false}
                       />
-                    )
-                )}
               </ul>
             </section>
           )
