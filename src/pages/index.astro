@@ -25,6 +25,7 @@ const recentEvents = sortedEvents.filter(({ data }) => {
   const eventDate = new Date(data.eventDatetime);
   return eventDate >= now;
 });
+
 ---
 <Layout>
   <Header />
